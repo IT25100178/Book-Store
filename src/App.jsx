@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PhoneLoginModal from "./components/PhoneLoginModal";
+import ProfilePage from "./pages/ProfilePage";
 
 import "./assets/App.css";  // Changed from "../App.css" to "./App.css"
 
@@ -22,6 +23,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
                 </ProtectedRoute>
               }
             />
