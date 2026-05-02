@@ -230,6 +230,30 @@
   transform: scale(0.98);
 }
 
+.btn-view-details {
+  flex: 1;
+  background: var(--secondary);
+  color: #000;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-view-details:hover {
+  background: var(--secondary-light);
+  transform: scale(1.02);
+}
+
+.btn-view-details:active {
+  transform: scale(0.98);
+}
+
 .btn-wishlist {
   width: 40px;
   height: 40px;

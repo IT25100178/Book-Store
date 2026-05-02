@@ -1,4 +1,5 @@
 // src/components/BookCard.jsx
+import { Link } from 'react-router-dom';
 import BookImage from './BookImage';
 import './BookCard.css';
 
@@ -72,6 +73,9 @@ export default function BookCard({ book, onAddToCart }) {
           <button className="btn-add-cart" onClick={handleAddToCart}>
             Add to Cart
           </button>
+          <Link to={`/book/${book.id}`} className="btn-view-details">
+            View Details
+          </Link>
           <button className="btn-wishlist">♡</button>
         </div>
       </div>
