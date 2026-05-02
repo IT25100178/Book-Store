@@ -1,0 +1,64 @@
+/* src/components/SortByPrice.css */
+
+:root {
+  --primary: #8B0000;
+  --secondary: #D4AF37;
+  --bg-card: #ffffff;
+  --text-primary: #1a1a1a;
+  --border-color: #e5e5e5;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg-card: #1a1a1a;
+  --text-primary: #ffffff;
+  --border-color: #2c2c2c;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
+.sort-price-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.sort-price-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow);
+}
+
+.sort-price-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+}
+
+.sort-icon {
+  font-size: 1.1rem;
+}
+
+.sort-indicator {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sort-price-btn {
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
+}
