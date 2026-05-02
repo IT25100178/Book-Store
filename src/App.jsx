@@ -7,6 +7,7 @@ import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PhoneLoginModal from "./components/PhoneLoginModal";
 import BookList from "./components/BookList";
+import BookDetails from "./components/BookDetails";
 
 import "./assets/App.css";  // Changed from "../App.css" to "./App.css"
 
@@ -31,6 +32,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <BookList />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/book/:id"
+              element={
+                <ProtectedRoute>
+                  <BookDetails />
                 </ProtectedRoute>
               }
             />
