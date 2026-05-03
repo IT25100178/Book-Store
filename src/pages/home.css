@@ -1,0 +1,51 @@
+.home {
+  font-family: Arial, sans-serif;
+}
+
+
+.hero {
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f") no-repeat center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 40px;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+}
+
+.overlay h1 {
+  font-size: 40px;
+}
+
+.overlay span {
+  color: gold;
+}
+
+.overlay p {
+  margin: 15px 0;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0;
+}
+
+.stats h2 {
+  color: gold;
+}
+
+.explore-btn {
+  padding: 10px 20px;
+  background: gold;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

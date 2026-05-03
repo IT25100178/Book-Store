@@ -1,52 +1,24 @@
-// src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
-import Home from "./components/Home";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import ProtectedRoute from "./components/ProtectedRoute";
-import PhoneLoginModal from "./components/PhoneLoginModal";
-import BookList from "./components/BookList";
-import BookDetails from "./components/BookDetails";
+import CheckoutPage from "./pages/CheckoutPage";
+import SavedCards from "./pages/SavedCards";
+import SavedAddresses from "./pages/SavedAddresses";
+import TaxPage from "./pages/TaxPage";
+import OrderConfirmation from "./pages/OrderConfirmation";
+import OrderHistory from "./pages/OrderHistory";
 
-import "./assets/App.css";  // Changed from "../App.css" to "./App.css"
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <div className="App">
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Home />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/books"
-              element={
-                <ProtectedRoute>
-                  <BookList />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/book/:id"
-              element={
-                <ProtectedRoute>
-                  <BookDetails />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </div>
-      </Router>
-    </AuthProvider>
+    <Router>
+      <Routes>
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/saved-addresses" element={<SavedAddresses />} />
+        <Route path="/saved-cards" element={<SavedCards />} />
+        <Route path="/tax" element={<TaxPage />} />
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
+        <Route path="/order-history" element={<OrderHistory />} />
+      </Routes>
+    </Router>
   );
 }
 
