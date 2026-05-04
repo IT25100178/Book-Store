@@ -1,0 +1,19 @@
+[ {
+  "id" : "g1",
+  "name" : "Fiction",
+  "description" : "Imaginative or invented stories.",
+  "bookIds" : [ "ccd3098b-b175-44d0-a341-6dc9eded6065", "0fd0223f-0beb-4642-a3e2-27d848ae2478", "20f4f5cc-181e-4ad9-a822-20d96c32fe89" ],
+  "colorTag" : "#3B82F6"
+}, {
+  "id" : "g2",
+  "name" : "Memoir",
+  "description" : "A historical account based on personal knowledge.",
+  "bookIds" : [ ],
+  "colorTag" : "#8B5CF6"
+}, {
+  "id" : "g3",
+  "name" : "History",
+  "description" : "The study of past events.",
+  "bookIds" : [ ],
+  "colorTag" : "#EAB308"
+} ]
