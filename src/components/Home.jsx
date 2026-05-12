@@ -1,10 +1,7 @@
 // src/components/Home.jsx
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD
 import { Link } from 'react-router-dom';
-=======
 import { useNavigate, useLocation } from 'react-router-dom';
->>>>>>> e1c49d2e3e63b365840d78f812c0441322bf6077
 import { useAuth } from '../context/AuthContext';
 import './Home.css';
 
