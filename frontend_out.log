@@ -1,0 +1,10 @@
+
+> lankabooks-frontend@1.0.0 dev
+> vite
+
+
+  [32m[1mVITE[22m v5.4.21[39m  [2mready in [0m[1m360[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://10.248.5.100:[1m5173[22m/[39m
+[2m5:06:04 pm[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/ActivityLog.jsx[22m

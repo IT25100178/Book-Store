@@ -1,0 +1,51 @@
+[ {
+  "id" : "ccd3098b-b175-44d0-a341-6dc9eded6065",
+  "title" : "The Great Gatsby",
+  "author" : "F. Scott Fitzgerald",
+  "isbn" : "9780743273565",
+  "category" : "Fiction",
+  "price" : 10.99,
+  "stockQuantity" : 50,
+  "description" : "A classic novel.",
+  "coverImageUrl" : "https://via.placeholder.com/150"
+}, {
+  "id" : "fa1d06b3-e307-4f48-8e1a-91b195982802",
+  "title" : "1984",
+  "author" : "George Orwell",
+  "isbn" : "9780451524935",
+  "category" : "Dystopian",
+  "price" : 9.99,
+  "stockQuantity" : 60,
+  "description" : "A terrifying vision.",
+  "coverImageUrl" : "https://via.placeholder.com/150"
+}, {
+  "id" : "0fd0223f-0beb-4642-a3e2-27d848ae2478",
+  "title" : "To Kill a Mockingbird",
+  "author" : "Harper Lee",
+  "isbn" : "9780060935467",
+  "category" : "Fiction",
+  "price" : 12.99,
+  "stockQuantity" : 40,
+  "description" : "A powerful novel.",
+  "coverImageUrl" : "https://via.placeholder.com/150"
+}, {
+  "id" : "2d4090ad-a229-48cb-850e-6f12ed8a37cf",
+  "title" : "Pride and Prejudice",
+  "author" : "Jane Austen",
+  "isbn" : "9780141439518",
+  "category" : "Romance",
+  "price" : 8.99,
+  "stockQuantity" : 70,
+  "description" : "A romantic classic.",
+  "coverImageUrl" : "https://via.placeholder.com/150"
+}, {
+  "id" : "20f4f5cc-181e-4ad9-a822-20d96c32fe89",
+  "title" : "The Catcher in the Rye",
+  "author" : "J.D. Salinger",
+  "isbn" : "9780316769488",
+  "category" : "Fiction",
+  "price" : 11.99,
+  "stockQuantity" : 30,
+  "description" : "A popular novel.",
+  "coverImageUrl" : "https://via.placeholder.com/150"
+} ]
