@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PhoneLoginModal from "./components/PhoneLoginModal";
+import ProfilePage from "./pages/ProfilePage";
 import BookList from "./components/BookList";
 import BookDetails from "./components/BookDetails";
 
@@ -24,6 +25,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
                 </ProtectedRoute>
               }
             />
