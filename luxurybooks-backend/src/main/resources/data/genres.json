@@ -1,0 +1,19 @@
+[ {
+  "id" : "4d00ef9d-d467-4b28-a414-9ab57b1665b3",
+  "name" : "Horror",
+  "description" : "",
+  "bookIds" : [ "e35a2b91-4525-41bd-be6b-50fe418556b2" ],
+  "colorTag" : "#EF4444"
+}, {
+  "id" : "g2",
+  "name" : "Memoir",
+  "description" : "A historical account based on personal knowledge.",
+  "bookIds" : [ ],
+  "colorTag" : "#8B5CF6"
+}, {
+  "id" : "g3",
+  "name" : "History",
+  "description" : "The study of past events.",
+  "bookIds" : [ ],
+  "colorTag" : "#EAB308"
+} ]

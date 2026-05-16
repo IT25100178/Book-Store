@@ -1,0 +1,22 @@
+# Java
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/wrapper/
+
+# Node
+node_modules/
+dist/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
