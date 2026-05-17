@@ -1,1 +1,2 @@
 ADMIN001|Vishahan Admin|admin@luxurybooks.com|admin123|(+94)742624977|132/1 Thalaiyadi Lane Jaffna|ADMIN|https://ui-avatars.com/api/?background=8B0000&color=fff&name=Admin|2024-01-01
+USR1779029054560|Jegan Digee|digee12@gmail.com|00000000|||USER|https://ui-avatars.com/api/?background=D4AF37&color=fff&name=Jegan+Digee|2026-05-17

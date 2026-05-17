@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { admin as adminApi, books as booksApi } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
+import logoImg from '../../assets/Luxury books logo.png';
 import './AdminDashboard.css';
 
 const SECTIONS = [
@@ -443,8 +444,8 @@ export default function AdminDashboard() {
       {/* ── Sidebar ─────────────────────────────────────────────────────── */}
       <aside className="admin-sidebar">
         <div className="sidebar-top">
-          <div className="admin-logo">
-            <span className="logo-emoji">📚</span>
+          <div className="admin-logo" style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+            <img src={logoImg} alt="Logo" style={{ height: '36px', width: 'auto', objectFit: 'contain' }} />
             <div className="logo-text">
               <p className="logo-title">Luxury Books</p>
               <p className="logo-sub">Admin Panel</p>

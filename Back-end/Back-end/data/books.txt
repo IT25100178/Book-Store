@@ -1,7 +1,7 @@
-BK001|The Great Gatsby|F. Scott Fitzgerald|14.99|24.99|4.5|Fiction|A story of decadence and excess exploring the darker aspects of the American Dream.|15|false|true|180|1925|📖
+BK001|The Great Gatsby|F. Scott Fitzgerald|14.99|24.99|4.5|Fiction|A story of decadence and excess exploring the darker aspects of the American Dream.|14|false|true|180|1925|📖
 BK002|To Kill a Mockingbird|Harper Lee|12.99|19.99|4.8|Classic|The unforgettable novel of a childhood in a sleepy Southern town and the crisis of conscience.|8|false|true|336|1960|📚
-BK003|1984|George Orwell|13.99|18.99|4.7|Dystopian|A dystopian social science fiction novel and cautionary tale against unchecked government power.|20|true|false|328|1949|📕
-BK004|Pride and Prejudice|Jane Austen|11.99|16.99|4.6|Romance|A romantic novel that also contains a sharp critique of the British class system.|12|false|true|279|1813|💕
+BK003|1984|George Orwell|13.99|18.99|4.7|Dystopian|A dystopian social science fiction novel and cautionary tale against unchecked government power.|19|true|false|328|1949|📕
+BK004|Pride and Prejudice|Jane Austen|11.99|16.99|4.6|Romance|A romantic novel that also contains a sharp critique of the British class system.|11|false|true|279|1813|💕
 BK005|The Hobbit|J.R.R. Tolkien|15.99|22.99|4.9|Fantasy|A fantasy novel about Bilbo Baggins and his unexpected adventure with wizards and dwarves.|25|false|true|310|1937|🐉
 BK006|Harry Potter and the Philosopher's Stone|J.K. Rowling|19.99|29.99|4.9|Fantasy|The story of a young wizard and his adventures at Hogwarts School of Witchcraft and Wizardry.|30|true|true|320|1997|⚡
 BK007|The Da Vinci Code|Dan Brown|12.99|17.99|4.3|Mystery|A mystery thriller about a murder investigation in the Louvre Museum in Paris.|18|false|false|454|2003|🔍
