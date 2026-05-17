@@ -68,7 +68,7 @@ export default function CheckoutPage() {
     cartItems.map(i => `${i.bookId}:${i.quantity}`).join(',');
 
   const buildAddressString = () =>
-    `${address.fullName}, ${address.line1}, ${address.city}, ${address.state} ${address.zip}, ${address.country} | ${address.phone}`;
+    `${address.fullName}, ${address.line1}, ${address.city}, ${address.state} ${address.zip}, ${address.country} - Phone: ${address.phone}`;
 
   // ── Place Order ───────────────────────────────────────────────────────────
 

@@ -47,7 +47,7 @@ export default function OrderHistory() {
         </div>
       ) : orderList.map((order) => {
         const { bg, color } = statusStyle(order.status);
-        const items = Array.isArray(order.items) ? order.items : [];
+        const items = Array.isArray(order.items) ? order.items : (order.items ? [order.items] : []);
         return (
           <div key={order.id} style={{
             background: 'var(--profile-sub-card-bg)',
