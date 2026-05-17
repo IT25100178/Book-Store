@@ -3,7 +3,7 @@
 // All auth calls now go to the Java backend via api.js
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { auth as authApi } from '../services/api';
+import { auth as authApi, users as usersApi } from '../services/api';
 
 const AuthContext = createContext();
 
@@ -110,6 +110,43 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // ── Update Profile – calls Java /api/users/:id ────────────────────────────
+
+  const updateUserProfile = async (updates) => {
+    if (!user?.id) return { success: false, error: 'Not logged in' };
+    try {
+      const { ok, data } = await usersApi.update(user.id, updates);
+      if (ok && data.success) {
+        const updated = { ...user, ...updates };
+        const storage = localStorage.getItem('user') ? localStorage : sessionStorage;
+        storage.setItem('user', JSON.stringify(updated));
+        setUser(updated);
+        return { success: true };
+      }
+      return { success: false, error: data.message || 'Update failed' };
+    } catch (_) {
+      // Offline fallback – update locally only
+      const updated = { ...user, ...updates };
+      const storage = localStorage.getItem('user') ? localStorage : sessionStorage;
+      storage.setItem('user', JSON.stringify(updated));
+      setUser(updated);
+      return { success: true };
+    }
+  };
+
+  // ── Change Password – calls Java /api/users/:id/change-password ───────────
+
+  const changePassword = async (currentPassword, newPassword) => {
+    if (!user?.id) return { success: false, error: 'Not logged in' };
+    try {
+      const { ok, data } = await usersApi.changePassword(user.id, currentPassword, newPassword);
+      if (ok && data.success) return { success: true, message: data.message };
+      return { success: false, error: data.message || 'Password change failed' };
+    } catch (_) {
+      return { success: false, error: 'Cannot connect to server.' };
+    }
+  };
+
   // ── Logout ────────────────────────────────────────────────────────────────
 
   const logout = () => clearSession();
@@ -126,6 +163,8 @@ export function AuthProvider({ children }) {
     resetPassword,
     logout,
     setError,
+    updateUserProfile,
+    changePassword,
     // Update user in state/storage after profile edit
     updateLocalUser: (updates) => {
       const updated = { ...user, ...updates };

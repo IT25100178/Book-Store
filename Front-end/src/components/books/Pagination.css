@@ -1,0 +1,11 @@
+/* Pagination.css */
+.pagination-container { display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:2rem 0; flex-wrap:wrap; }
+.pagination-btn { background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.2); border-radius:8px; color:#D4AF37; padding:0.6rem 1.2rem; font-size:0.88rem; font-weight:600; cursor:pointer; transition:all 0.2s; }
+.pagination-btn:hover:not(:disabled) { background:rgba(212,175,55,0.2); }
+.pagination-btn:disabled { opacity:0.3; cursor:not-allowed; }
+.page-numbers { display:flex; gap:0.3rem; }
+.page-btn { width:36px; height:36px; background:rgba(255,255,255,0.04); border:1px solid rgba(212,175,55,0.12); border-radius:6px; color:rgba(240,230,211,0.7); font-size:0.88rem; cursor:pointer; transition:all 0.2s; }
+.page-btn:hover:not(:disabled) { background:rgba(212,175,55,0.1); color:#D4AF37; }
+.page-btn.active { background:rgba(212,175,55,0.15); border-color:rgba(212,175,55,0.5); color:#D4AF37; font-weight:700; }
+.page-btn.dots { background:transparent; border:none; cursor:default; }
+.pagination-info { font-size:0.82rem; color:rgba(240,230,211,0.4); margin-left:0.5rem; }

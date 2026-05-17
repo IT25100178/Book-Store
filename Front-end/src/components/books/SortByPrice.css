@@ -1,0 +1,6 @@
+/* SortByPrice.css */
+.sort-price-btn { background:rgba(255,255,255,0.04); border:1px solid rgba(212,175,55,0.15); border-radius:8px; color:rgba(240,230,211,0.7); padding:0.55rem 1rem; font-size:0.88rem; font-weight:500; cursor:pointer; display:flex; align-items:center; gap:0.4rem; transition:all 0.2s; }
+.sort-price-btn:hover { background:rgba(212,175,55,0.08); color:#D4AF37; }
+.sort-price-btn.active { background:rgba(212,175,55,0.15); border-color:rgba(212,175,55,0.4); color:#D4AF37; font-weight:700; }
+.sort-icon { font-size:1rem; }
+.sort-indicator { font-size:0.85rem; }

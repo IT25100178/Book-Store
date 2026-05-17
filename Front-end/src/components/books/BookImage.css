@@ -1,0 +1,12 @@
+/* BookImage.css */
+.book-image-container { width:100%; height:100%; position:relative; display:flex; align-items:center; justify-content:center; }
+.featured-image { position:absolute; inset:0; opacity:0; transition:opacity 0.4s; overflow:hidden; }
+.featured-image.active { opacity:1; }
+.featured-image img { width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 0.3s; }
+.featured-image img.loaded { opacity:1; }
+.emoji-icon { font-size:4rem; display:flex; align-items:center; justify-content:center; transition:opacity 0.4s, transform 0.4s; z-index:1; }
+.emoji-icon.hidden { opacity:0; pointer-events:none; }
+.emoji-icon-only { font-size:4rem; display:flex; align-items:center; justify-content:center; }
+.image-loading { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.1); }
+.spinner { width:36px; height:36px; border:3px solid rgba(212,175,55,0.2); border-top:3px solid #D4AF37; border-radius:50%; animation:spin 1s linear infinite; }
+@keyframes spin { 100%{ transform:rotate(360deg); } }

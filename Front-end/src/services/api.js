@@ -97,6 +97,10 @@ export const orders = {
   getByUser: (userId) =>
     request('GET', `/orders/${userId}`),
 
+  /** Alias used by OrderHistory component */
+  getHistory: (userId) =>
+    request('GET', `/orders/${userId}`),
+
   getById: (orderId) =>
     request('GET', `/orders/detail/${orderId}`),
 };
@@ -130,6 +134,9 @@ export const users = {
 
 export const admin = {
   // Books
+  getAllBooks: () =>
+    request('GET', '/books?pageSize=999'),
+
   addBook: (book) =>
     request('POST', '/books', book),
 

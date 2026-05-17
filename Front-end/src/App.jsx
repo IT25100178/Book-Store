@@ -1,84 +1,72 @@
 // src/App.jsx
-// Full routing for all 7 members' components
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider }    from "./context/AuthContext";
-import { CartProvider }    from "./context/CartContext";
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider }  from './context/AuthContext';
+import { CartProvider }  from './context/CartContext';
+import '../src/assets/App.css';
 
-// Member 1 – Athethan
-import Login           from "./components/auth/Login";
-import Register        from "./components/auth/Register";
-import ForgotPassword  from "./components/auth/ForgotPassword";
-import Home            from "./components/home/Home";
+// ── Auth (Member 1 – Athethan) ─────────────────────────────────────────────
+import Login          from './components/auth/Login';
+import Register       from './components/auth/Register';
+import ForgotPassword from './components/auth/ForgotPassword';
 
-// Member 2 – Deepika
-import BookListPage    from "./components/books/BookListPage";
+// ── Home (Member 1 – Athethan) ─────────────────────────────────────────────
+import Home           from './components/home/Home';
 
-// Member 3 – Yuvaniya
-import BookDetailsPage from "./components/bookdetails/BookDetailsPage";
+// ── Books (Member 2 – Deepika) ─────────────────────────────────────────────
+import BookListPage   from './components/books/BookListPage';
 
-// Member 4 – Lojeni
-import CartPage        from "./components/cart/CartPage";
+// ── Book Details (Member 3 – Yuvaniya) ────────────────────────────────────
+import BookDetailsPage from './components/bookdetails/BookDetailsPage';
 
-// Member 5 – Vishnu
-import CheckoutPage    from "./components/checkout/CheckoutPage";
-import OrderConfirmation from "./components/checkout/OrderConfirmation";
+// ── Cart (Member 4 – Lojeni) ──────────────────────────────────────────────
+import CartPage       from './components/cart/CartPage';
 
-// Member 6 – Vishok
-import UserProfilePage from "./components/profile/UserProfilePage";
+// ── Checkout (Member 5 – Vishnu) ──────────────────────────────────────────
+import CheckoutPage      from './components/checkout/CheckoutPage';
+import OrderConfirmation from './components/checkout/OrderConfirmation';
 
-// Member 7 – Vishahan
-import AdminDashboard  from "./components/admin/AdminDashboard";
+// ── Profile (Member 6 – Vishok) ───────────────────────────────────────────
+import UserProfilePage from './components/profile/UserProfilePage';
 
-import ProtectedRoute  from "./components/shared/ProtectedRoute";
-import AdminRoute      from "./components/shared/AdminRoute";
+// ── Admin (Member 7 – Vishahan) ───────────────────────────────────────────
+import AdminDashboard from './components/admin/AdminDashboard';
 
-import "./assets/App.css";
+// ── Guards ────────────────────────────────────────────────────────────────
+import ProtectedRoute from './components/shared/ProtectedRoute';
+import AdminRoute     from './components/shared/AdminRoute';
 
-function App() {
+export default function App() {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <Router>
+    <Router>
+      <AuthProvider>
+        <CartProvider>
           <div className="App">
             <Routes>
-              {/* ── Public routes ─────────────────────────────────────────── */}
-              <Route path="/login"           element={<Login />} />
-              <Route path="/register"        element={<Register />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
+              {/* ── Public Routes ── */}
+              <Route path="/"                  element={<Home />} />
+              <Route path="/login"             element={<Login />} />
+              <Route path="/register"          element={<Register />} />
+              <Route path="/forgot-password"   element={<ForgotPassword />} />
 
-              {/* ── Protected user routes ─────────────────────────────────── */}
-              <Route path="/"
-                element={<ProtectedRoute><Home /></ProtectedRoute>} />
+              {/* ── Book Catalogue ── */}
+              <Route path="/books"             element={<BookListPage />} />
+              <Route path="/books/:id"         element={<BookDetailsPage />} />
 
-              <Route path="/books"
-                element={<ProtectedRoute><BookListPage /></ProtectedRoute>} />
+              {/* ── Protected User Routes ── */}
+              <Route path="/cart"              element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
+              <Route path="/checkout"          element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
+              <Route path="/order-confirmation/:orderId" element={<ProtectedRoute><OrderConfirmation /></ProtectedRoute>} />
+              <Route path="/profile"           element={<ProtectedRoute><UserProfilePage /></ProtectedRoute>} />
 
-              <Route path="/books/:id"
-                element={<ProtectedRoute><BookDetailsPage /></ProtectedRoute>} />
+              {/* ── Admin Routes ── */}
+              <Route path="/admin"             element={<AdminRoute><AdminDashboard /></AdminRoute>} />
 
-              <Route path="/cart"
-                element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
-
-              <Route path="/checkout"
-                element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
-
-              <Route path="/order-confirmation/:orderId"
-                element={<ProtectedRoute><OrderConfirmation /></ProtectedRoute>} />
-
-              <Route path="/profile"
-                element={<ProtectedRoute><UserProfilePage /></ProtectedRoute>} />
-
-              {/* ── Admin routes ──────────────────────────────────────────── */}
-              <Route path="/admin"
-                element={<AdminRoute><AdminDashboard /></AdminRoute>} />
-              <Route path="/admin/*"
-                element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+              {/* ── Fallback ── */}
+              <Route path="*"                  element={<Navigate to="/" replace />} />
             </Routes>
           </div>
-        </Router>
-      </CartProvider>
-    </AuthProvider>
+        </CartProvider>
+      </AuthProvider>
+    </Router>
   );
 }
-
-export default App;

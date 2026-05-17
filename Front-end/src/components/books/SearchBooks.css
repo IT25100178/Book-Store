@@ -1,0 +1,10 @@
+/* SearchBooks.css */
+.search-books-container { width:100%; }
+.search-input-wrapper { position:relative; display:flex; align-items:center; }
+.search-input { width:100%; padding:0.85rem 3rem 0.85rem 1.25rem; background:rgba(255,255,255,0.06); border:1px solid rgba(212,175,55,0.2); border-radius:12px; color:#f0e6d3; font-size:0.95rem; font-family:inherit; }
+.search-input:focus { outline:none; border-color:#D4AF37; background:rgba(255,255,255,0.09); }
+.search-input::placeholder { color:rgba(240,230,211,0.3); }
+.search-icon { position:absolute; right:0.9rem; font-size:1rem; pointer-events:none; }
+.clear-btn { position:absolute; right:2.5rem; background:none; border:none; color:rgba(240,230,211,0.5); font-size:0.85rem; cursor:pointer; padding:0.2rem 0.4rem; transition:color 0.2s; }
+.clear-btn:hover { color:#D4AF37; }
+.search-hint { font-size:0.78rem; color:rgba(212,175,55,0.6); margin-top:0.4rem; }
