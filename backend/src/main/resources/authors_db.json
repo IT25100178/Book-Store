@@ -1,0 +1,62 @@
+[
+  {
+    "id": "author-fitzgerald",
+    "name": "F. Scott Fitzgerald",
+    "photo": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop",
+    "bio": "Francis Scott Key Fitzgerald was an American novelist, essayist, and short story writer. He is best known for his novels depicting the flamboyance and excess of the Jazz Age—a term he popularized.",
+    "birthDate": "September 24, 1896",
+    "deathDate": "December 21, 1940",
+    "nationality": "American",
+    "notableWorks": ["The Great Gatsby", "Tender Is the Night", "The Beautiful and Damned"]
+  },
+  {
+    "id": "author-lee",
+    "name": "Harper Lee",
+    "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop",
+    "bio": "Nelle Harper Lee was an American novelist widely known for To Kill a Mockingbird, published in 1960. She received the Pulitzer Prize and Presidential Medal of Freedom for literature.",
+    "birthDate": "April 28, 1926",
+    "deathDate": "February 19, 2016",
+    "nationality": "American",
+    "notableWorks": ["To Kill a Mockingbird", "Go Set a Watchman"]
+  },
+  {
+    "id": "author-orwell",
+    "name": "George Orwell",
+    "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop",
+    "bio": "Eric Arthur Blair, better known by his pen name George Orwell, was an English novelist, essayist, journalist and critic. His work is marked by lucid prose, awareness of social injustice, and opposition to totalitarianism.",
+    "birthDate": "June 25, 1903",
+    "deathDate": "January 21, 1950",
+    "nationality": "British",
+    "notableWorks": ["1984", "Animal Farm", "Down and Out in Paris and London"]
+  },
+  {
+    "id": "author-austen",
+    "name": "Jane Austen",
+    "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop",
+    "bio": "Jane Austen was an English novelist known primarily for her six major novels, which interpret, critique and comment upon the British landed gentry at the end of the 18th century.",
+    "birthDate": "December 16, 1775",
+    "deathDate": "July 18, 1817",
+    "nationality": "British",
+    "notableWorks": ["Pride and Prejudice", "Sense and Sensibility", "Emma", "Persuasion"]
+  },
+  {
+    "id": "author-tolkien",
+    "name": "J.R.R. Tolkien",
+    "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop",
+    "bio": "John Ronald Reuel Tolkien was an English writer, poet, philologist, and academic. He is best known as the author of the classic high fantasy works The Hobbit, The Lord of the Rings, and The Silmarillion.",
+    "birthDate": "January 3, 1892",
+    "deathDate": "September 2, 1973",
+    "nationality": "British",
+    "notableWorks": ["The Hobbit", "The Lord of the Rings", "The Silmarillion"]
+  },
+  {
+    "id": "author-salinger",
+    "name": "J.D. Salinger",
+    "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop",
+    "bio": "Jerome David Salinger was an American writer best known for his novel The Catcher in the Rye. Following his debut in 1940, Salinger published several additional short stories.",
+    "birthDate": "January 1, 1919",
+    "deathDate": "January 27, 2010",
+    "nationality": "American",
+    "notableWorks": ["The Catcher in the Rye", "Nine Stories", "Franny and Zooey"]
+  }
+]
