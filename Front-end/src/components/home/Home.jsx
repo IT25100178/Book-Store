@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
 import { books as booksApi } from '../../services/api';
+import logoImg from '../../assets/Luxury books logo.png';
 import './Home.css';
 
 // Sample books for the hero/featured section (will also load from API)
@@ -95,8 +96,8 @@ export default function Home() {
 
       {/* ── Navbar ────────────────────────────────────────────────────────── */}
       <nav className="navbar">
-        <div className="navbar-brand" onClick={() => navigate('/')} style={{ cursor:'pointer' }}>
-          <div className="logo-icon">📚</div>
+        <div className="navbar-brand" onClick={() => navigate('/')} style={{ cursor:'pointer', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <img src={logoImg} alt="Luxury Books Logo" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
           <span className="brand-text">LUXURY<span>BOOKS</span></span>
         </div>
 
