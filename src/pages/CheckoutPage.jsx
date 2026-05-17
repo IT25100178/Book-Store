@@ -1,288 +1,938 @@
-const user = JSON.parse(localStorage.getItem("user"));
-import { useEffect } from "react";
-import { useContext, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import "../styles/checkout.css";
 
 export default function CheckoutPage() {
-  const cart = useContext(CartContext);
-  const cartItems = cart?.cartItems || [];
 
+  const navigate = useNavigate();
+
+  // =========================
+  // AUTH
+  // =========================
+  const {
+    user,
+    isAuthenticated,
+    logout,
+  } = useAuth();
+
+  // =========================
+  // CART
+  // =========================
+  const cart = useContext(CartContext);
+
+  const fallbackCart = [
+    {
+      id: 1,
+      title: "Atomic Habits 📘",
+      price: 2500,
+      quantity: 1,
+    },
+  ];
+
+  const cartItems =
+    cart?.cartItems &&
+    cart.cartItems.length > 0
+      ? cart.cartItems
+      : fallbackCart;
+
+  // =========================
+  // FORM
+  // =========================
   const [form, setForm] = useState({
-    name: "",
+    fullName: "",
     phone: "",
     address: "",
+    city: "",
+    postalCode: "",
+
     payment: "cod",
-    delivery: "standard",
+
     cardNumber: "",
     expiry: "",
-    cvv: ""
+    cvv: "",
   });
 
-  const deliveryCharge = form.delivery === "express" ? 50 : 0;
+  // =========================
+  // AUTO LOAD USER
+  // =========================
+  useEffect(() => {
+
+    if (user) {
+
+      setForm((prev) => ({
+        ...prev,
+        fullName:
+          user.displayName ||
+          user.name ||
+          "",
+      }));
+    }
+
+  }, [user]);
+
+  // =========================
+  // LOAD ADDRESS FROM BACKEND
+  // =========================
+  useEffect(() => {
+
+    loadAddresses();
+
+  }, []);
+
+  const loadAddresses = async () => {
+
+    try {
+
+      const response = await fetch(
+        "http://localhost:8080/addresses"
+      );
+
+      if (!response.ok) {
+        return;
+      }
+
+      const data =
+        await response.json();
+
+      if (data.length > 0) {
+
+        const latestAddress =
+          data[data.length - 1];
+
+        setForm((prev) => ({
+          ...prev,
+
+          fullName:
+            latestAddress.fullName || "",
+
+          phone:
+            latestAddress.phone || "",
+
+          address:
+            latestAddress.address || "",
+
+          city:
+            latestAddress.city || "",
+
+          postalCode:
+            latestAddress.postalCode || "",
+        }));
+      }
+
+    } catch (error) {
+
+      console.log(error);
+    }
+  };
+
+  // =========================
+  // LOAD PAYMENT FROM BACKEND
+  // =========================
+  useEffect(() => {
+
+    loadPayments();
+
+  }, []);
+
+  const loadPayments = async () => {
+
+    try {
+
+      const response = await fetch(
+        "http://localhost:8080/payments"
+      );
+
+      if (!response.ok) {
+        return;
+      }
+
+      const data =
+        await response.json();
+
+      if (data.length > 0) {
+
+        const latestPayment =
+          data[data.length - 1];
+
+        setForm((prev) => ({
+          ...prev,
+
+          cardNumber:
+            latestPayment.cardNumber || "",
+
+          expiry:
+            latestPayment.expiry || "",
+
+          cvv:
+            latestPayment.cvv || "",
+        }));
+      }
+
+    } catch (error) {
+
+      console.log(error);
+    }
+  };
+
+  // =========================
+  // CALCULATIONS
+  // =========================
+  const deliveryCharge = 0;
 
   const subtotal = cartItems.reduce(
-    (total, item) => total + (item.price || 0) * (item.quantity || 1),
+    (total, item) =>
+      total +
+      item.price *
+      item.quantity,
     0
   );
 
   const tax = subtotal * 0.02;
-  const total = subtotal + deliveryCharge + tax;
 
-  /*  ADDRESS  */
-  const saveAddress = () => {
-    const list = JSON.parse(localStorage.getItem("addresses") || "[]");
-    list.push({
-      address: form.address,
-      createdAt: new Date().toLocaleString()
-    });
-    localStorage.setItem("addresses", JSON.stringify(list));
-    alert("Address saved");
+  const total =
+    subtotal +
+    deliveryCharge +
+    tax;
+
+  // =========================
+  // LOGOUT
+  // =========================
+  const handleLogout = () => {
+
+    logout();
+
+    navigate("/login");
   };
 
-  /*  CARD  */
-  const saveCard = () => {
-    const list = JSON.parse(localStorage.getItem("cards") || "[]");
-    list.push({
-      number: form.cardNumber,
-      expiry: form.expiry,
-      createdAt: new Date().toLocaleString()
-    });
-    localStorage.setItem("cards", JSON.stringify(list));
-    alert("Card saved");
+  // =========================
+  // SAVE ADDRESS
+  // =========================
+  const saveAddress = async () => {
+
+    if (
+      !form.fullName ||
+      !form.phone ||
+      !form.address
+    ) {
+
+      alert(
+        "Please fill all address fields"
+      );
+
+      return;
+    }
+
+    try {
+
+      const addressData = {
+
+        id: Date.now(),
+
+        fullName:
+          form.fullName,
+
+        phone:
+          form.phone,
+
+        address:
+          form.address,
+
+        city:
+          form.city,
+
+        postalCode:
+          form.postalCode,
+      };
+
+      const response = await fetch(
+        "http://localhost:8080/addresses",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          body:
+            JSON.stringify(addressData),
+        }
+      );
+
+      if (!response.ok) {
+
+        alert(
+          "Failed To Save Address ❌"
+        );
+
+        return;
+      }
+
+      const message =
+        await response.text();
+
+      alert(message);
+
+      loadAddresses();
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert(
+        "Backend Not Running ❌"
+      );
+    }
   };
 
-  /*  TAX  */
-  const saveTax = () => {
-    const list = JSON.parse(localStorage.getItem("taxRecords") || "[]");
-    list.push({
+  // =========================
+  // SAVE PAYMENT
+  // =========================
+  const savePayment = async () => {
+
+    if (form.payment !== "online") {
+      return;
+    }
+
+    try {
+
+      const paymentData = {
+
+        id: Date.now(),
+
+        cardNumber:
+          form.cardNumber,
+
+        expiry:
+          form.expiry,
+
+        cvv:
+          form.cvv,
+      };
+
+      const response = await fetch(
+        "http://localhost:8080/payments",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          body:
+            JSON.stringify(paymentData),
+        }
+      );
+
+      if (!response.ok) {
+
+        alert(
+          "Failed To Save Payment ❌"
+        );
+
+        return;
+      }
+
+      const message =
+        await response.text();
+
+      alert(message);
+
+      loadPayments();
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert(
+        "Backend Not Running ❌"
+      );
+    }
+  };
+
+  // =========================
+  // SAVE TAX
+  // =========================
+  const saveTax = async () => {
+
+    try {
+
+      const response = await fetch(
+        "http://localhost:8080/tax",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          body:
+            JSON.stringify({
+              subtotal,
+              tax,
+              date:
+                new Date().toLocaleString(),
+            }),
+        }
+      );
+
+      if (!response.ok) {
+
+        alert(
+          "Failed To Save Tax ❌"
+        );
+
+        return;
+      }
+
+      const message =
+        await response.text();
+
+      alert(message);
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert(
+        "Backend Not Running ❌"
+      );
+    }
+  };
+
+  // =========================
+  // PLACE ORDER
+  // =========================
+  const placeOrder = async () => {
+
+    // LOGIN VALIDATION
+    if (!isAuthenticated || !user) {
+
+      alert("Please login first");
+
+      navigate("/login");
+
+      return;
+    }
+
+    // VALIDATION
+    if (!form.fullName.trim()) {
+
+      alert(
+        "Please enter full name"
+      );
+
+      return;
+    }
+
+    if (!form.phone.trim()) {
+
+      alert(
+        "Please enter phone number"
+      );
+
+      return;
+    }
+
+    if (
+      !/^[0-9]{10}$/.test(
+        form.phone
+      )
+    ) {
+
+      alert(
+        "Phone number must contain exactly 10 digits"
+      );
+
+      return;
+    }
+
+    if (!form.address.trim()) {
+
+      alert(
+        "Please enter address"
+      );
+
+      return;
+    }
+
+    if (
+      form.payment === "online"
+    ) {
+
+      if (
+        !form.cardNumber ||
+        !form.expiry ||
+        !form.cvv
+      ) {
+
+        alert(
+          "Please fill payment details"
+        );
+
+        return;
+      }
+
+      await savePayment();
+    }
+
+    // SAVE TAX BEFORE ORDER
+    await saveTax();
+
+    // ORDER OBJECT
+    const order = {
+
+      orderId: Date.now(),
+
+      customerName:
+        form.fullName,
+
+      phone:
+        form.phone,
+
+      address:
+        form.address,
+
+      city:
+        form.city,
+
+      postalCode:
+        form.postalCode,
+
+      paymentMethod:
+        form.payment === "cod"
+          ? "Cash On Delivery"
+          : "Online Payment",
+
       subtotal,
+
       tax,
-      createdAt: new Date().toLocaleString()
-    });
-    localStorage.setItem("taxRecords", JSON.stringify(list));
-    alert("Tax saved!");
+
+      total,
+
+      status: "PLACED",
+
+      items: cartItems,
+
+      createdAt:
+        new Date().toLocaleString(),
+    };
+
+    // =========================
+    // SEND TO BACKEND
+    // =========================
+    try {
+
+      const response = await fetch(
+        "http://localhost:8080/orders",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          body:
+            JSON.stringify(order),
+        }
+      );
+
+      // BACKEND FAILED
+      if (!response.ok) {
+
+        alert(
+          "Backend Server Error ❌"
+        );
+
+        return;
+      }
+
+      const message =
+        await response.text();
+
+      console.log(message);
+
+      alert(
+        "Order Placed Successfully 🎉"
+      );
+
+      navigate(
+        "/order-confirmation"
+      );
+
+    } catch (error) {
+
+      console.log(
+        "Backend connection failed"
+      );
+
+      console.error(error);
+
+      alert(
+        "Backend Not Running ❌"
+      );
+    }
   };
 
   return (
     <>
+      {/* HEADER */}
       <header className="checkout-header">
-       <div className="logo">
-         LUXURY<span>BOOKS</span>
-       </div>
 
-       <div className="user-info">
-         {user ? (
-         <span>{user.name}</span>
-         ) : (
-         <span className="guest">Guest</span>
-         )}
-       </div>
+        <div className="logo">
+          LUXURY
+          <span>BOOKS</span>
+        </div>
+
+        <div className="user-info">
+
+          {user ? (
+            <>
+              <span>
+                Hi,{" "}
+                {user.displayName ||
+                  user.name}
+              </span>
+
+              <button
+                className="logout-btn"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <span className="guest">
+              Guest
+            </span>
+          )}
+
+        </div>
+
       </header>
 
+      {/* MAIN */}
       <div className="checkout-container">
 
         {/* LEFT */}
         <div className="checkout-left">
-          <h2>Shipping Details</h2>
+
+          <h2>
+            Shipping Details 
+          </h2>
 
           <input
+            type="text"
             placeholder="Full Name"
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            value={form.fullName}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                fullName:
+                  e.target.value,
+              })
+            }
           />
 
           <input
+            type="text"
             placeholder="Phone Number"
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            value={form.phone}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                phone:
+                  e.target.value,
+              })
+            }
           />
 
           <textarea
             placeholder="Full Address"
-            onChange={(e) => setForm({ ...form, address: e.target.value })}
+            value={form.address}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                address:
+                  e.target.value,
+              })
+            }
+          />
+
+          <input
+            type="text"
+            placeholder="City"
+            value={form.city}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                city:
+                  e.target.value,
+              })
+            }
+          />
+
+          <input
+            type="text"
+            placeholder="Postal Code"
+            value={form.postalCode}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                postalCode:
+                  e.target.value,
+              })
+            }
           />
 
           <div className="button-group">
-            <button onClick={saveAddress}>Save Address</button>
-            <button onClick={() => window.open("/saved-addresses", "_blank")}>
-              Saved Address
+
+            <button onClick={saveAddress}>
+              Save Address
             </button>
+
+            <button
+              onClick={() =>
+                navigate(
+                  "/saved-addresses"
+                )
+              }
+            >
+              Manage Addresses
+            </button>
+
           </div>
 
-          <h3>Delivery Options</h3>
+          <h3>
+            Delivery Method 
+          </h3>
 
           <label className="option-row">
+
             <input
               type="radio"
-              checked={form.delivery === "standard"}
-              onChange={() => setForm({ ...form, delivery: "standard" })}
+              checked
+              readOnly
             />
-            <span>Standard (Free)</span>
+
+            <span>
+              Standard Delivery (Free)
+            </span>
+
+          </label>
+
+          <h3>
+            Payment Method 
+          </h3>
+
+          <label className="option-row">
+
+            <input
+              type="radio"
+              checked={
+                form.payment ===
+                "cod"
+              }
+              onChange={() =>
+                setForm({
+                  ...form,
+                  payment:
+                    "cod",
+                })
+              }
+            />
+
+            <span>
+              Cash on Delivery
+            </span>
+
           </label>
 
           <label className="option-row">
+
             <input
               type="radio"
-              checked={form.delivery === "express"}
-              onChange={() => setForm({ ...form, delivery: "express" })}
+              checked={
+                form.payment ===
+                "online"
+              }
+              onChange={() =>
+                setForm({
+                  ...form,
+                  payment:
+                    "online",
+                })
+              }
             />
-            <span>Express (+ Rs.50)</span>
+
+            <span>
+              Online Payment
+            </span>
+
           </label>
 
-          <h3>Payment Method</h3>
-
-          <label className="option-row">
-            <input
-              type="radio"
-              checked={form.payment === "cod"}
-              onChange={() => setForm({ ...form, payment: "cod" })}
-            />
-            <span>Cash on Delivery</span>
-          </label>
-
-          <label className="option-row">
-            <input
-              type="radio"
-              checked={form.payment === "online"}
-              onChange={() => setForm({ ...form, payment: "online" })}
-            />
-            <span>Online Payment</span>
-          </label>
-
-          {form.payment === "online" && (
+          {form.payment ===
+            "online" && (
             <>
               <input
+                type="text"
                 placeholder="Card Number"
-                onChange={(e) => setForm({ ...form, cardNumber: e.target.value })}
-              />
-              <input
-                placeholder="MM/YY"
-                onChange={(e) => setForm({ ...form, expiry: e.target.value })}
-              />
-              <input
-                placeholder="CVV"
-                onChange={(e) => setForm({ ...form, cvv: e.target.value })}
+                value={
+                  form.cardNumber
+                }
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    cardNumber:
+                      e.target.value,
+                  })
+                }
               />
 
-              <div className="button-group">
-                <button onClick={saveCard}>Save Card</button>
-                <button onClick={() => window.open("/saved-cards", "_blank")}>
-                  Saved Cards
-                </button>
-              </div>
+              <input
+                type="text"
+                placeholder="MM/YY"
+                value={
+                  form.expiry
+                }
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    expiry:
+                      e.target.value,
+                  })
+                }
+              />
+
+              <input
+                type="password"
+                placeholder="CVV"
+                value={form.cvv}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    cvv:
+                      e.target.value,
+                  })
+                }
+              />
+
+              <button
+                onClick={savePayment}
+              >
+                Add Payment
+              </button>
+
+              <button
+                onClick={() =>
+                  navigate(
+                    "/saved-payments"
+                  )
+                }
+              >
+                Manage Payments
+              </button>
             </>
           )}
+
         </div>
 
         {/* RIGHT */}
         <div className="checkout-right">
-          <h2>Order Summary</h2>
 
-          <p>Subtotal: Rs. {subtotal}</p>
-          <p>Delivery: Rs. {deliveryCharge}</p>
-          <p>Tax (2%): Rs. {tax.toFixed(2)}</p>
+          <h2>
+            Order Summary 🛒
+          </h2>
 
-          <h3>Total: Rs. {total.toFixed(2)}</h3>
+          {cartItems.map(
+            (item) => (
+              <div
+                key={item.id}
+                className="address-card"
+              >
+                <h3>
+                  {item.title}
+                </h3>
 
-          <div className="button-group">
+                <p>
+                  Price:
+                  Rs. {item.price}
+                </p>
+
+                <p>
+                  Quantity:
+                  {item.quantity}
+                </p>
+              </div>
+            )
+          )}
+
+          <p>
+            Subtotal:
+            Rs. {subtotal}
+          </p>
+
+          <p>
+            Delivery:
+            Rs. 0
+          </p>
+
+          <p>
+            Tax (2%):
+            Rs. {tax.toFixed(2)}
+          </p>
+
+          <h3>
+            Total:
+            Rs. {total.toFixed(2)}
+          </h3>
+
+          <div className="action-buttons-row">
+
             <button onClick={saveTax}>
-              Apply Tax & Build our Nation
-            </button>
-
-            <button onClick={() => window.open("/tax", "_blank")}>
-              View Your Tax Details
+              Add Tax
             </button>
 
             <button
-              onClick={() => {
-                if (!cartItems.length) {
-                  alert("Cart is empty");
-                  return;
-                }
-
-                if (!form.name.trim()) {
-                  alert("Enter your name");
-                  return;
-                }
-
-                if (!form.phone.trim()) {
-                  alert("Enter your phone number");
-                  return;
-                }
-
-                const phone = form.phone.trim();
-
-                if (!/^[0-9]+$/.test(phone)) {
-                  alert("Phone must contain only numbers");
-                  return;
-                }
-
-                if (phone.length !== 10) {
-                  alert("Phone must be 10 digits");
-                  return;
-                }
-
-                if (!form.address.trim()) {
-                  alert("Enter your address");
-                  return;
-                }
-
-                const user = JSON.parse(localStorage.getItem("user"));
-
-                if (!user) {
-                  alert("Please login first");
-                  return;
-                }
-
-                const orderId = Date.now();
-
-                const order = {
-                  orderId,
-                  user: {
-                    name: form.name,
-                    phone: form.phone,
-                    address: form.address,
-                  },
-                    items: cartItems,
-                    payment: {
-                    method: form.payment,
-                  },
-
-                  delivery: {
-                    type: form.delivery,
-                    charge: deliveryCharge,
-                  },
-
-                  charges: {
-                    subtotal,
-                    tax,
-                    delivery: deliveryCharge,
-                  },
-                  total,
-                    status: "PLACED",
-                    createdAt: new Date().toISOString(),
-                  };
-
-
-                const existingOrders =
-                  JSON.parse(localStorage.getItem("orders")) || [];
-
-                existingOrders.push(order);
-
-
-                localStorage.setItem("orders", JSON.stringify(existingOrders));
-
-                localStorage.setItem("latestOrder", JSON.stringify(order));
-
-                window.location.href = "/order-confirmation";
-              }}
+              onClick={() =>
+                navigate("/tax")
+              }
             >
+              View Tax
+            </button>
+
+            <button onClick={placeOrder}>
               Place Order
             </button>
 
-            <button onClick={() => window.open("/order-history", "_blank")}>
-              Order History
+            <button
+              onClick={() =>
+                navigate(
+                  "/order-history"
+                )
+              }
+            >
+              Orders
             </button>
+
           </div>
+
+          <button
+            className="receipt-btn"
+            onClick={() =>
+              navigate(
+                "/saved-invoices"
+              )
+            }
+          >
+            Payment Receipts 
+          </button>
+
         </div>
 
       </div>
