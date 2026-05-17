@@ -9,7 +9,7 @@ public class BookStoreItem extends BookInfo {
     private int stock;
     private String availability;
     private String image;
-    private boolean featuredImage;
+    private String featuredImage;
     private String authorId;
     private String publisher;
     private int pages;
@@ -21,7 +21,7 @@ public class BookStoreItem extends BookInfo {
 
     public BookStoreItem(int id, String isbn, String title, String description, double price, double originalPrice, 
                          double rating, int year, String author, String category, int stock, String availability, 
-                         String image, boolean featuredImage, String authorId, String publisher, int pages) {
+                         String image, String featuredImage, String authorId, String publisher, int pages) {
         super(isbn, title, description, price, originalPrice, rating, year, author);
         this.id = id;
         this.category = category;
@@ -59,8 +59,8 @@ public class BookStoreItem extends BookInfo {
     public String getImage() { return image; }
     public void setImage(String image) { this.image = image; }
 
-    public boolean isFeaturedImage() { return featuredImage; }
-    public void setFeaturedImage(boolean featuredImage) { this.featuredImage = featuredImage; }
+    public String getFeaturedImage() { return featuredImage; }
+    public void setFeaturedImage(String featuredImage) { this.featuredImage = featuredImage; }
 
     public String getAuthorId() { return authorId; }
     public void setAuthorId(String authorId) { this.authorId = authorId; }
