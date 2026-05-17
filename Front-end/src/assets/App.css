@@ -1,0 +1,155 @@
+/* App.css – Global design system for Luxury Books */
+
+/* ── CSS Variables ────────────────────────────────────────────────────────── */
+:root {
+  --bg-primary:     #0a0a0f;
+  --bg-secondary:   #0e0e1a;
+  --bg-card:        rgba(255, 255, 255, 0.04);
+  --bg-card-hover:  rgba(255, 255, 255, 0.07);
+
+  --text-primary:   #f0e6d3;
+  --text-secondary: rgba(240, 230, 211, 0.6);
+  --text-muted:     rgba(240, 230, 211, 0.35);
+
+  --gold:           #D4AF37;
+  --gold-light:     #FFD700;
+  --gold-dim:       rgba(212, 175, 55, 0.15);
+  --burgundy:       #8B0000;
+  --burgundy-light: #A00000;
+
+  --border:         rgba(212, 175, 55, 0.15);
+  --border-hover:   rgba(212, 175, 55, 0.4);
+
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-xl:  28px;
+
+  --shadow-gold:     0 4px 20px rgba(212, 175, 55, 0.12);
+  --shadow-burgundy: 0 8px 24px rgba(139, 0, 0, 0.4);
+}
+
+/* ── Light theme overrides ────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg-primary:   #faf7f2;
+  --bg-secondary: #f3ede3;
+  --bg-card:      rgba(139, 0, 0, 0.04);
+  --text-primary: #1a0a0a;
+  --text-secondary: rgba(26, 10, 10, 0.6);
+  --bg-card-hover: rgba(139, 0, 0, 0.07);
+}
+
+/* ── Reset ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Typography ───────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 { line-height: 1.2; font-weight: 700; }
+
+a { color: inherit; }
+
+button { font-family: inherit; }
+
+input, select, textarea {
+  font-family: inherit;
+  outline: none;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.25); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.5); }
+
+/* ── Selection ────────────────────────────────────────────────────────────── */
+::selection { background: rgba(212, 175, 55, 0.2); }
+
+/* ── App container ────────────────────────────────────────────────────────── */
+.App { min-height: 100vh; }
+
+/* ── Utility classes ──────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--burgundy), var(--burgundy-light));
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: var(--radius-md);
+  color: var(--gold);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.9rem 2rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-burgundy);
+}
+
+.btn-secondary {
+  background: var(--gold-dim);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-md);
+  color: var(--gold);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  transition: background 0.2s;
+}
+.btn-secondary:hover { background: rgba(212, 175, 55, 0.25); }
+
+/* ── Animations ───────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.05); }
+}
+
+.animate-fade-in    { animation: fadeIn    0.4s ease forwards; }
+.animate-slide-down { animation: slideDown 0.4s ease forwards; }
+.animate-slide-up   { animation: slideUp   0.4s ease forwards; }
+.animate-scale-in   { animation: scaleIn   0.4s ease forwards; }
+.animate-pulse      { animation: pulse     2s ease infinite; }
+
+/* ── Star ratings ─────────────────────────────────────────────────────────── */
+.star        { color: rgba(212, 175, 55, 0.3); font-size: 0.95rem; }
+.star.filled { color: #D4AF37; }
