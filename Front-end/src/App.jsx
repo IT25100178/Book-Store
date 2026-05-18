@@ -37,12 +37,15 @@ import AdminDashboard from './components/admin/AdminDashboard';
 // ── Guards ────────────────────────────────────────────────────────────────
 import ProtectedRoute from './components/shared/ProtectedRoute';
 import AdminRoute     from './components/shared/AdminRoute';
+import PageLoader     from './components/shared/PageLoader';
 
 function AnimatedRoutes() {
   const location = useLocation();
   return (
-    <div key={location.pathname} className="page-transition-wrapper">
-      <Routes location={location}>
+    <>
+      <PageLoader />
+      <div key={location.pathname} className="page-transition-wrapper">
+        <Routes location={location}>
         {/* ── Public Routes ── */}
         <Route path="/"                  element={<Home />} />
         <Route path="/login"             element={<Login />} />
@@ -66,6 +69,7 @@ function AnimatedRoutes() {
         <Route path="*"                  element={<Navigate to="/" replace />} />
       </Routes>
     </div>
+    </>
   );
 }
 

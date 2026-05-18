@@ -1,0 +1,73 @@
+.page-loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-darker, #050508);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: overlaySequence 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes overlaySequence {
+  0% { 
+    opacity: 1; 
+    visibility: visible; 
+    backdrop-filter: blur(20px); 
+    pointer-events: all; 
+  }
+  60% { 
+    opacity: 1; 
+    visibility: visible; 
+    backdrop-filter: blur(20px); 
+    pointer-events: all; 
+  }
+  99% { 
+    opacity: 0; 
+    visibility: visible; 
+    backdrop-filter: blur(0px); 
+    pointer-events: none; 
+  }
+  100% { 
+    opacity: 0; 
+    visibility: hidden; 
+    pointer-events: none; 
+    display: none;
+  }
+}
+
+.ripple-loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ripple-bar {
+  width: 8px;
+  height: 45px;
+  background: var(--gold-gradient, linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #D4AF37 100%));
+  border-radius: 4px;
+  animation: rippleWave 1s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.ripple-bar:nth-child(1) { animation-delay: 0.0s; }
+.ripple-bar:nth-child(2) { animation-delay: 0.1s; }
+.ripple-bar:nth-child(3) { animation-delay: 0.2s; }
+.ripple-bar:nth-child(4) { animation-delay: 0.3s; }
+.ripple-bar:nth-child(5) { animation-delay: 0.4s; }
+.ripple-bar:nth-child(6) { animation-delay: 0.5s; }
+.ripple-bar:nth-child(7) { animation-delay: 0.6s; }
+
+@keyframes rippleWave {
+  0%, 100% { 
+    transform: scaleY(0.5) scaleX(1) translateY(0%); 
+    opacity: 0.4;
+  }
+  50% { 
+    transform: scaleY(1.5) scaleX(0.8) translateY(-15%); 
+    opacity: 1;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.9);
+  }
+}
