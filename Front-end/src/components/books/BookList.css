@@ -1,23 +1,79 @@
 /* BookList.css – Member 2 (Deepika) */
 .book-list-container { min-height:100vh; color:var(--text-primary); font-family:'Inter',sans-serif; }
 
-.book-list-header { 
-  background: linear-gradient(135deg, rgba(122, 0, 22, 0.4), rgba(122, 0, 22, 0.1));
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  color: white; 
-  padding: 4rem 2rem 3rem; 
-  text-align: center; 
+.catalog-hero {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  margin-top: -80px; /* Counteract padding from main-content */
+  padding: 2rem;
 }
-.book-list-header h1 { font-family: 'Poppins', sans-serif; font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; color: var(--text-primary); }
-.book-list-header p  { font-size:1.1rem; color: var(--text-secondary); }
 
-.book-list-main { display:flex; gap:3rem; padding: 3rem 2rem; max-width: 1300px; margin: 0 auto; }
+.catalog-hero-content {
+  z-index: 1;
+}
+
+.catalog-hero-content h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.catalog-hero-content p {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+}
+
+.book-list-main { display:flex; gap:3rem; padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
 .book-list-sidebar { width:260px; flex-shrink:0; }
 .book-list-content { flex:1; min-width:0; }
 
-.book-list-controls { margin-bottom:2rem; display:flex; flex-direction:column; gap:1.5rem; }
-.sort-controls { display:flex; gap:1rem; flex-wrap:wrap; }
+.catalog-toolbar {
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+.sort-controls-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sort-label {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Style child selects if any */
+.sort-controls-wrapper select {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-md);
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.sort-controls-wrapper select:hover,
+.sort-controls-wrapper select:focus {
+  border-color: var(--gold);
+}
 
 .results-info { 
   padding:1rem 1.5rem; 
@@ -32,6 +88,16 @@
 
 .books-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:2rem; margin-bottom:3rem; }
 
+.catalog-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 0;
+  gap: 1.5rem;
+  color: var(--gold);
+}
+
 .no-results { text-align:center; padding:4rem 2rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; backdrop-filter: blur(8px); }
 .no-results p { font-size:1.1rem; color: var(--text-secondary); margin-bottom:1.5rem; }
 .no-results button { background: linear-gradient(135deg, var(--burgundy), var(--burgundy-light)); color: var(--gold); border:none; padding:0.8rem 2rem; border-radius:var(--radius-xl); cursor:pointer; font-weight:600; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
@@ -40,11 +106,12 @@
 @media (max-width:1024px) { 
   .book-list-main { flex-direction:column; gap: 2rem; padding: 2rem; } 
   .book-list-sidebar { width:100%; } 
+  .catalog-toolbar { flex-direction: column; align-items: stretch; gap: 1.5rem; }
+  .sort-controls-wrapper { justify-content: space-between; flex-wrap: wrap; }
 }
 
 @media (max-width:768px) {
-  .book-list-header { padding: 3rem 1rem 2rem; }
-  .book-list-header h1 { font-size: 2rem; }
+  .catalog-hero { min-height: 300px; }
   .books-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
   .book-list-main { padding: 1.5rem 1rem; }
 }

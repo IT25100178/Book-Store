@@ -1,11 +1,86 @@
 /* CategorySidebar.css */
-.category-sidebar { background:rgba(255,255,255,0.03); border:1px solid rgba(212,175,55,0.12); border-radius:16px; padding:1.5rem; }
-.sidebar-section { margin-bottom:1.5rem; }
-.sidebar-title { font-size:1rem; font-weight:700; color:#D4AF37; margin-bottom:1rem; }
-.sidebar-subtitle { font-size:0.85rem; font-weight:600; color:rgba(240,230,211,0.6); margin-bottom:0.5rem; }
-.category-list { display:flex; flex-direction:column; gap:0.3rem; }
-.category-link { display:flex; align-items:center; justify-content:space-between; background:transparent; border:none; border-radius:8px; padding:0.6rem 0.75rem; color:rgba(240,230,211,0.7); font-size:0.88rem; cursor:pointer; transition:all 0.2s; width:100%; text-align:left; }
-.category-link:hover, .category-link.active { background:rgba(212,175,55,0.1); color:#D4AF37; }
-.category-arrow { font-size:0.75rem; opacity:0.5; }
-.price-info p, .rating-filter p { font-size:0.8rem; color:rgba(240,230,211,0.45); }
-.sidebar-hint { font-size:0.78rem; color:rgba(212,175,55,0.5); }
+.category-sidebar { 
+  background: var(--glass-bg); 
+  border: 1px solid var(--glass-border); 
+  border-radius: var(--radius-lg); 
+  padding: 2rem 1.5rem; 
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.sidebar-section { margin-bottom: 2rem; }
+.sidebar-section:last-child { margin-bottom: 0; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem; }
+
+.sidebar-title { 
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem; 
+  font-weight: 600; 
+  color: var(--text-primary); 
+  margin-bottom: 1.5rem; 
+}
+
+.sidebar-subtitle { 
+  font-size: 0.9rem; 
+  font-weight: 600; 
+  color: var(--text-secondary); 
+  margin-bottom: 1rem; 
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.category-list { display:flex; flex-direction:column; gap: 0.5rem; }
+
+.category-link { 
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  background: transparent; 
+  border: none; 
+  border-radius: var(--radius-md); 
+  padding: 0.8rem 1rem; 
+  color: var(--text-secondary); 
+  font-size: 0.95rem; 
+  cursor:pointer; 
+  transition:all 0.3s ease; 
+  width:100%; 
+  text-align:left; 
+}
+
+.category-link:hover { 
+  background: rgba(255,255,255,0.05); 
+  color: var(--text-primary); 
+  transform: translateX(4px);
+}
+
+.category-link.active { 
+  background: linear-gradient(135deg, rgba(122, 0, 22, 0.4), rgba(122, 0, 22, 0.1));
+  color: var(--gold); 
+  border: 1px solid rgba(223, 177, 99, 0.3);
+}
+
+.category-arrow { 
+  font-size: 1rem; 
+  opacity: 0; 
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.category-link:hover .category-arrow, 
+.category-link.active .category-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.price-info p, .rating-filter p { 
+  font-size: 0.85rem; 
+  color: var(--text-muted); 
+  line-height: 1.5;
+}
+
+.sidebar-hint { 
+  font-size: 0.85rem; 
+  color: var(--gold); 
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

@@ -1,10 +1,50 @@
 /* SearchBooks.css */
-.search-books-container { width:100%; }
-.search-input-wrapper { position:relative; display:flex; align-items:center; }
-.search-input { width:100%; padding:0.85rem 3rem 0.85rem 1.25rem; background:rgba(255,255,255,0.06); border:1px solid rgba(212,175,55,0.2); border-radius:12px; color:#f0e6d3; font-size:0.95rem; font-family:inherit; }
-.search-input:focus { outline:none; border-color:#D4AF37; background:rgba(255,255,255,0.09); }
-.search-input::placeholder { color:rgba(240,230,211,0.3); }
-.search-icon { position:absolute; right:0.9rem; font-size:1rem; pointer-events:none; }
-.clear-btn { position:absolute; right:2.5rem; background:none; border:none; color:rgba(240,230,211,0.5); font-size:0.85rem; cursor:pointer; padding:0.2rem 0.4rem; transition:color 0.2s; }
-.clear-btn:hover { color:#D4AF37; }
-.search-hint { font-size:0.78rem; color:rgba(212,175,55,0.6); margin-top:0.4rem; }
+.search-books-container { width:100%; flex: 1; max-width: 500px; }
+.search-input-wrapper { position:relative; display:flex; align-items:center; width: 100%; }
+
+.search-input { 
+  width:100%; 
+  padding: 0.85rem 3rem 0.85rem 1.25rem; 
+  background: rgba(0,0,0,0.4); 
+  border: 1px solid rgba(255,255,255,0.1); 
+  border-radius: var(--radius-lg); 
+  color: var(--text-primary); 
+  font-size: 1rem; 
+  font-family: 'Inter', sans-serif; 
+  transition: all 0.3s ease;
+}
+
+.search-input:focus { 
+  outline: none; 
+  border-color: var(--gold); 
+  background: rgba(0,0,0,0.6); 
+  box-shadow: 0 0 15px rgba(223, 177, 99, 0.2);
+}
+
+.search-input::placeholder { color: var(--text-muted); }
+
+.search-icon { 
+  position: absolute; 
+  right: 1.2rem; 
+  font-size: 1.1rem; 
+  pointer-events: none; 
+  opacity: 0.6;
+}
+
+.clear-btn { 
+  position: absolute; 
+  right: 2.8rem; 
+  background: none; 
+  border: none; 
+  color: var(--text-secondary); 
+  font-size: 1rem; 
+  cursor: pointer; 
+  padding: 0.2rem; 
+  transition: color 0.2s; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-btn:hover { color: var(--gold); transform: scale(1.1); }
+.search-hint { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.6rem; padding-left: 0.5rem; }

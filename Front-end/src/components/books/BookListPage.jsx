@@ -101,19 +101,22 @@ export default function BookListPage() {
   return (
     <div className="book-list-container">
       {notification && (
-        <div style={{
-          position: 'fixed', top: '5rem', right: '1.5rem', zIndex: 9999,
-          background: '#8B0000', color: '#D4AF37', padding: '0.75rem 1.5rem',
-          borderRadius: '10px', fontWeight: 600, fontSize: '0.9rem',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.3)', animation: 'slideIn 0.3s ease',
-        }}>
+        <div className="glass-notification animate-slide-down">
           {notification}
         </div>
       )}
 
-      <div className="book-list-header">
-        <h1>Book Store</h1>
-        <p>Browsing {total} books in our collection</p>
+      {/* ── Premium Catalog Hero ── */}
+      <div className="catalog-hero" style={{ 
+        backgroundImage: `linear-gradient(to right, rgba(5, 5, 8, 0.95), rgba(5, 5, 8, 0.7)), url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}>
+        <div className="catalog-hero-content animate-slide-up">
+          <h1>The Collection</h1>
+          <p>Discover our curated selection of {total} extraordinary volumes</p>
+        </div>
       </div>
 
       <div className="book-list-main">
@@ -128,12 +131,13 @@ export default function BookListPage() {
 
         {/* Main Content */}
         <main className="book-list-content">
-          <div className="book-list-controls">
+          <div className="catalog-toolbar glass-card">
             <SearchBooks
               searchTerm={searchTerm}
               onSearch={(term) => handleFilterChange('search', term)}
             />
-            <div className="sort-controls">
+            <div className="sort-controls-wrapper">
+              <span className="sort-label">Sort by:</span>
               <SortByPrice  sortBy={sortBy} sortOrder={sortOrder} onSort={handleSortChange} />
               <SortByRating sortBy={sortBy} sortOrder={sortOrder} onSort={handleSortChange} />
             </div>
@@ -150,8 +154,9 @@ export default function BookListPage() {
           </div>
 
           {loading ? (
-            <div style={{ textAlign: 'center', padding: '4rem', color: '#D4AF37', fontSize: '1.5rem' }}>
-              📚 Loading…
+            <div className="catalog-loading">
+              <div className="spinner"></div>
+              <p>Curating collection...</p>
             </div>
           ) : books.length > 0 ? (
             <div className="books-grid">
