@@ -4,6 +4,9 @@ import { AuthProvider }  from './context/AuthContext';
 import { CartProvider }  from './context/CartContext';
 import '../src/assets/App.css';
 
+import Navbar from './components/shared/Navbar';
+import Footer from './components/shared/Footer';
+
 // ── Auth (Member 1 – Athethan) ─────────────────────────────────────────────
 import Login          from './components/auth/Login';
 import Register       from './components/auth/Register';
@@ -41,8 +44,10 @@ export default function App() {
       <AuthProvider>
         <CartProvider>
           <div className="App">
-            <Routes>
-              {/* ── Public Routes ── */}
+            <Navbar />
+            <main className="main-content">
+              <Routes>
+                {/* ── Public Routes ── */}
               <Route path="/"                  element={<Home />} />
               <Route path="/login"             element={<Login />} />
               <Route path="/register"          element={<Register />} />
@@ -61,9 +66,11 @@ export default function App() {
               {/* ── Admin Routes ── */}
               <Route path="/admin"             element={<AdminRoute><AdminDashboard /></AdminRoute>} />
 
-              {/* ── Fallback ── */}
-              <Route path="*"                  element={<Navigate to="/" replace />} />
-            </Routes>
+                {/* ── Fallback ── */}
+                <Route path="*"                  element={<Navigate to="/" replace />} />
+              </Routes>
+            </main>
+            <Footer />
           </div>
         </CartProvider>
       </AuthProvider>
