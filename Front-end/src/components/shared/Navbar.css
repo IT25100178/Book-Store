@@ -231,9 +231,40 @@
 }
 
 @media (max-width: 768px) {
+  .premium-navbar {
+    padding: 1rem;
+  }
+  
+  .premium-navbar.scrolled {
+    padding: 0.75rem 1rem;
+  }
+  
+  .brand-logo {
+    height: 32px;
+  }
+  
+  .brand-text {
+    font-size: 1.1rem;
+  }
+
+  .navbar-actions {
+    gap: 1rem;
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .btn-glass {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
   .navbar-links {
     position: fixed;
-    top: 70px;
+    top: 60px;
     left: 0;
     right: 0;
     background: rgba(10, 10, 15, 0.95);

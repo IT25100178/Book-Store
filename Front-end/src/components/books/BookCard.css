@@ -217,3 +217,21 @@
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(122, 0, 22, 0.4);
 }
+
+@media (max-width: 768px) {
+  .modern-book-image-wrapper {
+    height: 200px;
+  }
+  
+  .modern-book-content {
+    padding: 1rem;
+  }
+  
+  .current-price {
+    font-size: 1.25rem;
+  }
+  
+  .modern-book-title {
+    font-size: 1.05rem;
+  }
+}
