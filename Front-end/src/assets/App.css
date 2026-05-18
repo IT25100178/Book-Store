@@ -150,6 +150,25 @@ input, select, textarea { font-family: inherit; outline: none; }
 @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
+/* ── Page Transition ── */
+.page-transition-wrapper {
+  animation: pageFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+@keyframes pageFadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(12px) scale(0.99); 
+    filter: blur(4px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+    filter: blur(0);
+  }
+}
+
 .animate-fade-in    { animation: fadeIn    0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 .animate-slide-down { animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 .animate-slide-up   { animation: slideUp   0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }

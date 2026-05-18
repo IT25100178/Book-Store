@@ -1,5 +1,5 @@
 // src/App.jsx
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider }  from './context/AuthContext';
 import { CartProvider }  from './context/CartContext';
 import '../src/assets/App.css';
@@ -38,6 +38,37 @@ import AdminDashboard from './components/admin/AdminDashboard';
 import ProtectedRoute from './components/shared/ProtectedRoute';
 import AdminRoute     from './components/shared/AdminRoute';
 
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <div key={location.pathname} className="page-transition-wrapper">
+      <Routes location={location}>
+        {/* ── Public Routes ── */}
+        <Route path="/"                  element={<Home />} />
+        <Route path="/login"             element={<Login />} />
+        <Route path="/register"          element={<Register />} />
+        <Route path="/forgot-password"   element={<ForgotPassword />} />
+
+        {/* ── Book Catalogue ── */}
+        <Route path="/books"             element={<BookListPage />} />
+        <Route path="/books/:id"         element={<BookDetailsPage />} />
+
+        {/* ── Protected User Routes ── */}
+        <Route path="/cart"              element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
+        <Route path="/checkout"          element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
+        <Route path="/order-confirmation/:orderId" element={<ProtectedRoute><OrderConfirmation /></ProtectedRoute>} />
+        <Route path="/profile"           element={<ProtectedRoute><UserProfilePage /></ProtectedRoute>} />
+
+        {/* ── Admin Routes ── */}
+        <Route path="/admin"             element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+
+        {/* ── Fallback ── */}
+        <Route path="*"                  element={<Navigate to="/" replace />} />
+      </Routes>
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <Router>
@@ -46,29 +77,7 @@ export default function App() {
           <div className="App">
             <Navbar />
             <main className="main-content">
-              <Routes>
-                {/* ── Public Routes ── */}
-              <Route path="/"                  element={<Home />} />
-              <Route path="/login"             element={<Login />} />
-              <Route path="/register"          element={<Register />} />
-              <Route path="/forgot-password"   element={<ForgotPassword />} />
-
-              {/* ── Book Catalogue ── */}
-              <Route path="/books"             element={<BookListPage />} />
-              <Route path="/books/:id"         element={<BookDetailsPage />} />
-
-              {/* ── Protected User Routes ── */}
-              <Route path="/cart"              element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
-              <Route path="/checkout"          element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
-              <Route path="/order-confirmation/:orderId" element={<ProtectedRoute><OrderConfirmation /></ProtectedRoute>} />
-              <Route path="/profile"           element={<ProtectedRoute><UserProfilePage /></ProtectedRoute>} />
-
-              {/* ── Admin Routes ── */}
-              <Route path="/admin"             element={<AdminRoute><AdminDashboard /></AdminRoute>} />
-
-                {/* ── Fallback ── */}
-                <Route path="*"                  element={<Navigate to="/" replace />} />
-              </Routes>
+              <AnimatedRoutes />
             </main>
             <Footer />
           </div>
