@@ -22,9 +22,11 @@ const FEATURES = [
 ];
 
 const REVIEWS = [
-  { id: 1, name: 'Eleanor Vance', text: 'The curation here is absolutely unmatched. I found first editions I have been seeking for years.', rating: 5, role: 'Collector' },
-  { id: 2, name: 'James Morrison', text: 'The packaging alone is an experience. Truly a luxury destination for bibliophiles.', rating: 5, role: 'Author' },
-  { id: 3, name: 'Sophia Chen', text: 'Fast global shipping and the customer service is as premium as the books they sell.', rating: 5, role: 'Avid Reader' },
+  { tempId: 1, name: 'Eleanor Vance', text: 'The curation here is absolutely unmatched. I found first editions I have been seeking for years.', rating: 5, role: 'Collector', imgSrc: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80' },
+  { tempId: 2, name: 'James Morrison', text: 'The packaging alone is an experience. Truly a luxury destination for bibliophiles.', rating: 5, role: 'Author', imgSrc: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80' },
+  { tempId: 3, name: 'Sophia Chen', text: 'Fast global shipping and the customer service is as premium as the books they sell.', rating: 5, role: 'Avid Reader', imgSrc: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80' },
+  { tempId: 4, name: 'Daniel Foster', text: 'If I could give 11 stars, I would. This is the only bookstore I use now.', rating: 5, role: 'History Buff', imgSrc: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80' },
+  { tempId: 5, name: 'Amelia Rose', text: 'The best UI and shopping experience I have ever seen for buying books.', rating: 5, role: 'Designer', imgSrc: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80' },
 ];
 
 export default function Home() {
@@ -56,7 +58,34 @@ export default function Home() {
     return () => clearTimeout(timeoutId);
   }, [titleIndex, heroTitles.length]);
 
-  const showNotif = (msg) => { 
+  // ── Staggered Testimonials State ──
+  const [testimonialsList, setTestimonialsList] = useState(REVIEWS);
+  const [cardSize, setCardSize] = useState(380);
+
+  useEffect(() => {
+    const updateSize = () => setCardSize(window.innerWidth > 640 ? 380 : 300);
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  const handleMoveReviews = (steps) => {
+    const newList = [...testimonialsList];
+    if (steps > 0) {
+      for (let i = steps; i > 0; i--) {
+        const item = newList.shift();
+        if (item) newList.push({ ...item, tempId: Math.random() });
+      }
+    } else {
+      for (let i = steps; i < 0; i++) {
+        const item = newList.pop();
+        if (item) newList.unshift({ ...item, tempId: Math.random() });
+      }
+    }
+    setTestimonialsList(newList);
+  };
+
+  const showNotif = (msg) => {  
     setNotification(msg); 
     setTimeout(() => setNotification(''), 3000); 
   };
@@ -255,30 +284,62 @@ export default function Home() {
         </section>
       )}
 
-      {/* ── Client Testimonials ── */}
+      {/* ── Client Testimonials (Staggered 3D Carousel) ── */}
       <section className="premium-section cinematic-reviews-section">
         <div className="cinematic-glow"></div>
-        <div className="section-header center-header" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="section-header center-header" style={{ position: 'relative', zIndex: 1, marginBottom: 0 }}>
           <h2 className="section-title">Voices of the Inner Circle</h2>
           <p className="section-subtitle">What our readers say about the luxury experience.</p>
         </div>
-        <div className="reviews-glass-grid">
-          {REVIEWS.map((review, i) => (
-            <div key={review.id} className="glass-card review-card" style={{ animationDelay: `${i * 0.4}s` }}>
-              <div className="review-quote-icon">"</div>
-              <div className="review-rating">
-                {'★'.repeat(Math.floor(review.rating))}{'☆'.repeat(5-Math.floor(review.rating))}
-              </div>
-              <p className="review-text">{review.text}</p>
-              <div className="review-author">
-                <div className="author-avatar">{review.name.charAt(0)}</div>
-                <div className="author-info">
-                  <h4>{review.name}</h4>
-                  <span>{review.role}</span>
+        
+        <div className="stagger-testimonials-container">
+          {testimonialsList.map((review, index) => {
+            const position = testimonialsList.length % 2
+              ? index - (testimonialsList.length - 1) / 2
+              : index - testimonialsList.length / 2;
+            const isCenter = position === 0;
+
+            return (
+              <div
+                key={review.tempId}
+                onClick={() => handleMoveReviews(position)}
+                className={`stagger-card ${isCenter ? 'center-card' : 'side-card'}`}
+                style={{
+                  width: cardSize,
+                  height: cardSize,
+                  transform: `
+                    translate(-50%, -50%) 
+                    translateX(${(cardSize / 1.5) * position}px)
+                    translateY(${isCenter ? -30 : position % 2 ? 15 : -15}px)
+                    rotate(${isCenter ? 0 : position % 2 ? 4 : -4}deg)
+                  `,
+                  zIndex: isCenter ? 10 : 0,
+                }}
+              >
+                <div className="review-quote-icon">"</div>
+                <div className="review-rating">
+                  {'★'.repeat(Math.floor(review.rating))}{'☆'.repeat(5-Math.floor(review.rating))}
+                </div>
+                <p className="review-text">{review.text}</p>
+                <div className="review-author">
+                  <img src={review.imgSrc} alt={review.name} className="author-avatar" />
+                  <div className="author-info">
+                    <h4>{review.name}</h4>
+                    <span>{review.role}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
+          
+          <div className="stagger-controls">
+            <button onClick={() => handleMoveReviews(-1)} className="stagger-btn" aria-label="Previous">
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button onClick={() => handleMoveReviews(1)} className="stagger-btn" aria-label="Next">
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
         </div>
       </section>
 
