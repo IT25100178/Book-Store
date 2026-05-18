@@ -15,6 +15,24 @@ import Pagination from './Pagination';
 import CategorySidebar from './CategorySidebar';
 import './BookList.css';
 
+// ── Cinematic Text Effect Component ──
+const AnimatedText = ({ text, delayOffset = 0 }) => (
+  <span style={{ display: 'inline-block' }}>
+    {text.split('').map((char, index) => (
+      <span
+        key={index}
+        className="stagger-char"
+        style={{ 
+          animationDelay: `${delayOffset + index * 0.03}s`,
+          display: char === ' ' ? 'inline' : 'inline-block'
+        }}
+      >
+        {char}
+      </span>
+    ))}
+  </span>
+);
+
 export default function BookListPage() {
   const { user } = useAuth();
   const { addToCart } = useCart();
@@ -113,9 +131,9 @@ export default function BookListPage() {
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
       }}>
-        <div className="catalog-hero-content animate-slide-up">
-          <h1>The Collection</h1>
-          <p>Discover our curated selection of {total} extraordinary volumes</p>
+        <div className="catalog-hero-content">
+          <h1><AnimatedText text="The Collection" /></h1>
+          <p><AnimatedText text={`Discover our curated selection of ${total} extraordinary volumes`} delayOffset={0.5} /></p>
         </div>
       </div>
 

@@ -31,6 +31,19 @@
   font-weight: 300;
 }
 
+/* ── Staggered Text Effect ── */
+.stagger-char {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(20px);
+  animation: charFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes charFadeIn {
+  0% { opacity: 0; filter: blur(12px); transform: translateY(20px); }
+  100% { opacity: 1; filter: blur(0px); transform: translateY(0); }
+}
+
 .book-list-main { display:flex; gap:3rem; padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
 .book-list-sidebar { width:260px; flex-shrink:0; }
 .book-list-content { flex:1; min-width:0; }
