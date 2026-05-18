@@ -211,17 +211,20 @@ export default function Home() {
       )}
 
       {/* ── Client Testimonials ── */}
-      <section className="premium-section">
-        <div className="section-header">
-          <h2 className="section-title">Reader Testimonials</h2>
+      <section className="premium-section cinematic-reviews-section">
+        <div className="cinematic-glow"></div>
+        <div className="section-header center-header" style={{ position: 'relative', zIndex: 1 }}>
+          <h2 className="section-title">Voices of the Inner Circle</h2>
+          <p className="section-subtitle">What our readers say about the luxury experience.</p>
         </div>
         <div className="reviews-glass-grid">
-          {REVIEWS.map(review => (
-            <div key={review.id} className="glass-card review-card">
+          {REVIEWS.map((review, i) => (
+            <div key={review.id} className="glass-card review-card" style={{ animationDelay: `${i * 0.4}s` }}>
+              <div className="review-quote-icon">"</div>
               <div className="review-rating">
                 {'★'.repeat(Math.floor(review.rating))}{'☆'.repeat(5-Math.floor(review.rating))}
               </div>
-              <p className="review-text">"{review.text}"</p>
+              <p className="review-text">{review.text}</p>
               <div className="review-author">
                 <div className="author-avatar">{review.name.charAt(0)}</div>
                 <div className="author-info">
