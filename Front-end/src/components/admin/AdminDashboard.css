@@ -451,3 +451,89 @@
   .modal-checks { grid-column: span 1; }
   .reports-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Light Theme Overrides ────────────────────────────────────────────────── */
+.theme-light {
+  background: #f8fafc;
+  color: #1e293b;
+}
+.theme-light .admin-sidebar { background: #ffffff; border-right-color: #e2e8f0; }
+.theme-light .admin-topbar { background: rgba(255,255,255,0.9); border-bottom-color: #e2e8f0; }
+.theme-light .topbar-section { color: #0f172a; }
+.theme-light .topbar-search { background: #f1f5f9; border-color: #e2e8f0; }
+.theme-light .topbar-search-input { color: #334155; }
+.theme-light .topbar-search-input::placeholder { color: #94a3b8; }
+.theme-light .admin-nav .nav-item { color: #64748b; }
+.theme-light .admin-nav .nav-item:hover { background: #f1f5f9; color: #0f172a; }
+.theme-light .admin-nav .nav-item.active { background: #fff1f2; color: #e11d48; }
+.theme-light .sidebar-admin-badge { background: #f8fafc; border-color: #e2e8f0; }
+.theme-light .admin-name { color: #0f172a; }
+.theme-light .footer-btn.view-site { color: #64748b; }
+.theme-light .footer-btn.view-site:hover { background: #f1f5f9; color: #0f172a; }
+
+.theme-light .stat-card, 
+.theme-light .quick-card, 
+.theme-light .table-card, 
+.theme-light .report-card, 
+.theme-light .report-chart-card, 
+.theme-light .cat-card {
+  background: #ffffff; border-color: #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+.theme-light .section-title { background: none; -webkit-text-fill-color: #0f172a; color: #0f172a; }
+.theme-light .section-subtitle, .theme-light .header-date { color: #64748b; }
+.theme-light .admin-table th { color: #475569; background: #f8fafc; border-bottom-color: #e2e8f0; }
+.theme-light .admin-table td { border-bottom-color: #f1f5f9; }
+.theme-light .table-row { border-bottom-color: #f1f5f9; }
+.theme-light .table-row:hover { background: #f8fafc; }
+.theme-light .book-title-text, .theme-light .user-cell span { color: #0f172a; }
+.theme-light .text-muted { color: #64748b; }
+.theme-light .text-gold { color: #b45309; font-weight: 700; }
+.theme-light .status-select { background: #f8fafc; color: #0f172a; border-color: #cbd5e1; }
+.theme-light .quick-title { color: #0f172a; }
+.theme-light .cat-chip { background: #f1f5f9; border-color: #e2e8f0; color: #475569; }
+.theme-light .report-card h3, .theme-light .report-row span { color: #64748b; }
+.theme-light .report-row strong { color: #0f172a; }
+.theme-light .report-chart-card h3 { color: #0f172a; }
+.theme-light .cat-card-name { color: #0f172a; }
+.theme-light .cat-card-count { color: #64748b; }
+
+/* ── Graphs & Charts ─────────────────────────────────────────────────────── */
+.chart-container {
+  display: flex; gap: 2rem;
+  margin-top: 1.5rem; flex-wrap: wrap;
+}
+.svg-graph-box {
+  flex: 1; min-width: 300px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 12px; padding: 1rem;
+  border: 1px solid rgba(255,255,255,0.05);
+  display: flex; flex-direction: column; align-items: center;
+}
+.theme-light .svg-graph-box { background: #f8fafc; border-color: #e2e8f0; }
+.svg-graph-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 1rem; color: rgba(240,230,211,0.7); width: 100%; text-align: left; }
+.theme-light .svg-graph-title { color: #475569; }
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; cursor: pointer; transition: all 0.2s;
+}
+.theme-light .theme-toggle-btn { background: #f1f5f9; border-color: #e2e8f0; }
+.theme-toggle-btn:hover { background: rgba(255,255,255,0.1); transform: rotate(15deg); }
+
+/* Filters */
+.filters-row {
+  display: flex; gap: 1rem; margin-bottom: 1rem;
+}
+.filter-select {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 8px; color: #f0e6d3;
+  padding: 0.5rem 1rem; font-size: 0.85rem;
+  outline: none; cursor: pointer;
+}
+.theme-light .filter-select { background: #ffffff; color: #0f172a; border-color: #cbd5e1; }
