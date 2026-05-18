@@ -12,7 +12,7 @@ const TRENDING_BOOKS = {
     image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=500',
     stats: { status: 'In Stock', rating: 4.9 },
     features: [
-      { label: 'Condition', value: 98 },
+      { label: 'Reviews', value: 98 },
       { label: 'Rarity', value: 92 },
     ]
   },
@@ -25,7 +25,7 @@ const TRENDING_BOOKS = {
     image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=500',
     stats: { status: 'Only 2 Left', rating: 4.8 },
     features: [
-      { label: 'Condition', value: 95 },
+      { label: 'Reviews', value: 95 },
       { label: 'Demand', value: 89 },
     ]
   }
