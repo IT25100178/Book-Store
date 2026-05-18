@@ -45,6 +45,17 @@ export default function Home() {
     });
   }, []);
 
+  // ── Animated Hero Titles ──
+  const [titleIndex, setTitleIndex] = useState(0);
+  const heroTitles = ["Great Adventure", "Rare Edition", "Masterpiece", "Next Obsession", "Timeless Classic"];
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setTitleIndex((prev) => (prev + 1) % heroTitles.length);
+    }, 2500);
+    return () => clearTimeout(timeoutId);
+  }, [titleIndex, heroTitles.length]);
+
   const showNotif = (msg) => { 
     setNotification(msg); 
     setTimeout(() => setNotification(''), 3000); 
@@ -72,16 +83,50 @@ export default function Home() {
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
       }}>
-        <div className="hero-content animate-slide-up">
-          <h1 className="hero-title">
-            Discover Your Next <br /> <span className="gradient-text">Great Adventure</span>
+        <div className="hero-content animate-slide-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className="hero-badge">
+            <span className="badge-text">Read our launch article</span>
+            <svg className="badge-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+          
+          <h1 className="hero-title" style={{ textAlign: 'center' }}>
+            Discover Your <br />
+            <div className="animated-title-wrapper">
+              {heroTitles.map((title, index) => {
+                let yOffset = 100;
+                let opacity = 0;
+                if (titleIndex === index) { yOffset = 0; opacity = 1; } 
+                else if (titleIndex > index) { yOffset = -150; opacity = 0; }
+                else { yOffset = 150; opacity = 0; }
+                
+                return (
+                  <span
+                    key={index}
+                    className="animated-title-text gradient-text"
+                    style={{
+                      transform: `translateY(${yOffset}%)`,
+                      opacity: opacity,
+                      position: titleIndex === index ? 'relative' : 'absolute',
+                      top: 0, left: 0, right: 0,
+                      transition: 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                    }}
+                  >
+                    {title}
+                  </span>
+                );
+              })}
+            </div>
           </h1>
-          <p className="hero-subtitle">
-            Immerse yourself in our curated collection of luxury books. From timeless classics to modern masterpieces, find the stories that speak to your soul.
+          <p className="hero-subtitle" style={{ textAlign: 'center' }}>
+            Managing your literary collection is already tough. Avoid further complications by ditching outdated methods. Our goal is to streamline your reading journey, making it easier and faster than ever.
           </p>
           <div className="hero-buttons">
-            <Link to="/books" className="btn-primary">Explore Collection</Link>
-            <Link to="/books?category=Best Sellers" className="btn-secondary">View Best Sellers</Link>
+            <Link to="/contact" className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+              Jump on a call <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </Link>
+            <Link to="/register" className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+              Sign up here <svg className="badge-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </Link>
           </div>
         </div>
       </section>

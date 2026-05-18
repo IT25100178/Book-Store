@@ -60,6 +60,38 @@
   line-height: 1.1;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.animated-title-wrapper {
+  position: relative;
+  height: 1.2em; /* Ensure height matches one line of text */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.animated-title-text {
+  display: inline-block;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(223, 177, 99, 0.1);
+  border: 1px solid rgba(223, 177, 99, 0.3);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .hero-subtitle {
