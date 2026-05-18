@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import BookImage from '../books/BookImage';
 import './CartPage.css';
 
 export default function CartPage() {
@@ -91,7 +92,9 @@ export default function CartPage() {
         <div className="cart-items-section">
           {cartItems.map((item) => (
             <div key={item.bookId} className="cart-item-card">
-              <div className="cart-item-emoji">{item.book?.image || '📖'}</div>
+              <div className="cart-item-image-wrapper" style={{ width: '80px', height: '110px', flexShrink: 0, borderRadius: '8px', overflow: 'hidden' }}>
+                <BookImage title={item.book?.title} featuredImage={item.book?.featuredImage} />
+              </div>
 
               <div className="cart-item-info">
                 <h3 className="cart-item-title">{item.book?.title || 'Book'}</h3>
@@ -147,7 +150,9 @@ export default function CartPage() {
               <h3>Saved for Later ({savedItems.length})</h3>
               {savedItems.map((item) => (
                 <div key={item.bookId} className="saved-item">
-                  <span className="saved-emoji">{item.book?.image || '📖'}</span>
+                  <div style={{ width: '50px', height: '70px', borderRadius: '4px', overflow: 'hidden', flexShrink: 0 }}>
+                    <BookImage title={item.book?.title} featuredImage={item.book?.featuredImage} />
+                  </div>
                   <div className="saved-info">
                     <strong>{item.book?.title}</strong>
                     <span>${item.book?.price}</span>

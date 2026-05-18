@@ -66,44 +66,8 @@ export default function UserProfilePage() {
   return (
     <div className="profile-page-wrapper" style={{ padding: 0 }}>
 
-      {/* ── Navbar ─────────────────────────────────────────────────────────── */}
-      <nav className="navbar animate-slide-down">
-        <div className="navbar-brand" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.75rem' }} onClick={() => navigate('/')}>
-          <img src={logoImg} alt="Luxury Books Logo" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
-          <span className="brand-text">LUXURY<span>BOOKS</span></span>
-        </div>
-
-        <div className="navbar-actions">
-          {/* Cart icon links to /cart page */}
-          <Link to="/cart" className="cart-icon-wrapper" style={{ textDecoration:'none', color:'inherit' }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <circle cx="9" cy="21" r="1.5"></circle>
-              <circle cx="20" cy="21" r="1.5"></circle>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-            </svg>
-            {cartCount > 0 && <span className="cart-badge animate-pulse">{cartCount}</span>}
-          </Link>
-
-          <div className="user-dropdown">
-            <div className="user-avatar">
-              {user?.name?.charAt(0) || 'U'}
-            </div>
-            <span className="user-name">
-              {user?.name || user?.email?.split('@')[0] || 'Reader'}
-            </span>
-            <button onClick={() => setShowLogoutModal(true)} className="logout-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l4-4-4-4M20 13H9"
-                  stroke="currentColor" strokeWidth="2"/>
-              </svg>
-              Logout
-            </button>
-          </div>
-        </div>
-      </nav>
-
       {/* ── Body ───────────────────────────────────────────────────────────── */}
-      <div style={{ padding: '110px 20px 40px' }}>
+      <div style={{ padding: '20px 20px 40px' }}>
         <div className="profile-container">
 
           {/* Sidebar */}
