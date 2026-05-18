@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
 import { books as booksApi } from '../../services/api';
 import BookImage from '../books/BookImage';
+import TrendingShowcase from './TrendingShowcase';
 import './Home.css';
 
 const CATEGORIES = [
@@ -159,6 +160,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── Trending Books Spatial Showcase ── */}
+      <TrendingShowcase />
 
       {/* ── Marquee (Running Text) ── */}
       <div className="premium-marquee">
