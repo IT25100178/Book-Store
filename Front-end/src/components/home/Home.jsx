@@ -15,6 +15,18 @@ const CATEGORIES = [
   { name: 'Science',   icon: '🔬', color: 'rgba(0, 100, 0, 0.2)' },
 ];
 
+const FEATURES = [
+  { icon: '✨', title: 'Curated Excellence', text: 'Every book is hand-selected by our literary experts.' },
+  { icon: '🛡️', title: 'Secure Packaging', text: 'Premium materials ensure your books arrive in pristine condition.' },
+  { icon: '💎', title: 'First Editions', text: 'Exclusive access to rare, signed, and vintage copies.' }
+];
+
+const REVIEWS = [
+  { id: 1, name: 'Eleanor Vance', text: 'The curation here is absolutely unmatched. I found first editions I have been seeking for years.', rating: 5, role: 'Collector' },
+  { id: 2, name: 'James Morrison', text: 'The packaging alone is an experience. Truly a luxury destination for bibliophiles.', rating: 5, role: 'Author' },
+  { id: 3, name: 'Sophia Chen', text: 'Fast global shipping and the customer service is as premium as the books they sell.', rating: 5, role: 'Avid Reader' },
+];
+
 export default function Home() {
   const { user } = useAuth();
   const { addToCart } = useCart();
@@ -71,6 +83,42 @@ export default function Home() {
             <Link to="/books" className="btn-primary">Explore Collection</Link>
             <Link to="/books?category=Best Sellers" className="btn-secondary">View Best Sellers</Link>
           </div>
+        </div>
+      </section>
+
+      {/* ── Marquee (Running Text) ── */}
+      <div className="premium-marquee">
+        <div className="marquee-content">
+          <span>✨ Free Global Shipping over $50</span>
+          <span className="dot">•</span>
+          <span>📚 Curated First Editions</span>
+          <span className="dot">•</span>
+          <span>💎 Premium Member Benefits</span>
+          <span className="dot">•</span>
+          <span>🛡️ Secure Luxury Packaging</span>
+          <span className="dot">•</span>
+          <span>✨ Free Global Shipping over $50</span>
+          <span className="dot">•</span>
+          <span>📚 Curated First Editions</span>
+          <span className="dot">•</span>
+          <span>💎 Premium Member Benefits</span>
+        </div>
+      </div>
+
+      {/* ── Why Choose Us (Features) ── */}
+      <section className="premium-section">
+        <div className="section-header center-header">
+          <h2 className="section-title">The Luxury Experience</h2>
+          <p className="section-subtitle">Why bibliophiles choose us worldwide.</p>
+        </div>
+        <div className="features-glass-grid">
+          {FEATURES.map((feature, i) => (
+            <div key={i} className="glass-card feature-card">
+              <div className="feature-icon">{feature.icon}</div>
+              <h3>{feature.title}</h3>
+              <p>{feature.text}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -161,6 +209,42 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* ── Client Testimonials ── */}
+      <section className="premium-section">
+        <div className="section-header">
+          <h2 className="section-title">Reader Testimonials</h2>
+        </div>
+        <div className="reviews-glass-grid">
+          {REVIEWS.map(review => (
+            <div key={review.id} className="glass-card review-card">
+              <div className="review-rating">
+                {'★'.repeat(Math.floor(review.rating))}{'☆'.repeat(5-Math.floor(review.rating))}
+              </div>
+              <p className="review-text">"{review.text}"</p>
+              <div className="review-author">
+                <div className="author-avatar">{review.name.charAt(0)}</div>
+                <div className="author-info">
+                  <h4>{review.name}</h4>
+                  <span>{review.role}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Newsletter ── */}
+      <section className="premium-section newsletter-section">
+        <div className="glass-card newsletter-card">
+          <h2>Join the Inner Circle</h2>
+          <p>Subscribe to receive exclusive access to rare drops, literary events, and member benefits.</p>
+          <form className="newsletter-form" onSubmit={(e) => { e.preventDefault(); showNotif('Subscribed successfully!'); e.target.reset(); }}>
+            <input type="email" placeholder="Enter your email address..." required className="newsletter-input" />
+            <button type="submit" className="btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </section>
     </div>
   );
 }
