@@ -1,0 +1,25 @@
+[ {
+  "id" : "0e99a764-11a4-499b-80bb-255ce2ef1ecd",
+  "name" : "Fiction",
+  "description" : "",
+  "bookIds" : [ "ccd3098b-b175-44d0-a341-6dc9eded6065", "0fd0223f-0beb-4642-a3e2-27d848ae2478", "20f4f5cc-181e-4ad9-a822-20d96c32fe89" ],
+  "colorTag" : "#3B82F6"
+}, {
+  "id" : "4d00ef9d-d467-4b28-a414-9ab57b1665b3",
+  "name" : "Horror",
+  "description" : "",
+  "bookIds" : [ ],
+  "colorTag" : "#EF4444"
+}, {
+  "id" : "g2",
+  "name" : "Memoir",
+  "description" : "A historical account based on personal knowledge.",
+  "bookIds" : [ "7b0b8644-75cf-4f31-bd12-d7aa3cf563d5" ],
+  "colorTag" : "#8B5CF6"
+}, {
+  "id" : "g3",
+  "name" : "History",
+  "description" : "The study of past events.",
+  "bookIds" : [ "f4cf93de-c130-4e95-a1a1-375478a581dc" ],
+  "colorTag" : "#EAB308"
+} ]

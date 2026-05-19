@@ -1,0 +1,7 @@
+[
+    { "id": "1", "code": "LUXURY20", "type": "Percentage", "value": 20, "minOrder": 50, "expiry": "2026-12-31", "status": "Active", "usage": 145, "maxUses": 500 },
+    { "id": "2", "code": "FREESHIP", "type": "Free Shipping", "value": 0, "minOrder": 30, "expiry": "2026-06-30", "status": "Active", "usage": 890, "maxUses": 1000 },
+    { "id": "3", "code": "SUMMER50", "type": "Fixed Amount", "value": 50, "minOrder": 100, "expiry": "2025-09-01", "status": "Expired", "usage": 42, "maxUses": 200 },
+    { "id": "4", "code": "WELCOME10", "type": "Percentage", "value": 10, "minOrder": 0, "expiry": "2026-12-31", "status": "Active", "usage": 231, "maxUses": 1000 },
+    { "id": "5", "code": "FLASH30", "type": "Percentage", "value": 30, "minOrder": 75, "expiry": "2026-05-15", "status": "Active", "usage": 58, "maxUses": 100 }
+]

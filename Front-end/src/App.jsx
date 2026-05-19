@@ -32,7 +32,7 @@ import OrderConfirmation from './components/checkout/OrderConfirmation';
 import UserProfilePage from './components/profile/UserProfilePage';
 
 // ── Admin (Member 7 – Vishahan) ───────────────────────────────────────────
-import AdminDashboard from './components/admin/AdminDashboard';
+import AdminApp from './admin/AdminApp';
 
 // ── Guards ────────────────────────────────────────────────────────────────
 import ProtectedRoute from './components/shared/ProtectedRoute';
@@ -63,7 +63,7 @@ function AnimatedRoutes() {
         <Route path="/profile"           element={<ProtectedRoute><UserProfilePage /></ProtectedRoute>} />
 
         {/* ── Admin Routes ── */}
-        <Route path="/admin"             element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+        <Route path="/admin/*"             element={<AdminRoute><AdminApp /></AdminRoute>} />
 
         {/* ── Fallback ── */}
         <Route path="*"                  element={<Navigate to="/" replace />} />

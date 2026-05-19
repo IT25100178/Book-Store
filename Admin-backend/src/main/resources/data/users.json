@@ -1,0 +1,31 @@
+[ {
+  "id" : "b52be0e0-4011-454b-b0ea-3c2fb76410ed",
+  "name" : "Admin User",
+  "email" : "admin@bookstore.com",
+  "role" : "ADMIN",
+  "status" : "ACTIVE"
+}, {
+  "id" : "06b4a0f1-396c-404d-a0cb-23a7fa5917cd",
+  "name" : "John Doe",
+  "email" : "john@example.com",
+  "role" : "MEMBER",
+  "status" : "ACTIVE"
+}, {
+  "id" : "8285818c-8aaf-4e81-bf72-06efde3a82a7",
+  "name" : "Jane Smith",
+  "email" : "jane@example.com",
+  "role" : "MEMBER",
+  "status" : "ACTIVE"
+}, {
+  "id" : "2ab87b3a-7fa2-45d0-aefe-e819be7fc3d6",
+  "name" : "Bob Brown",
+  "email" : "bob@example.com",
+  "role" : "MEMBER",
+  "status" : "BANNED"
+}, {
+  "id" : "473a66e0-38de-490c-b6a0-04772eb5b34e",
+  "name" : "Alice Green",
+  "email" : "alice@example.com",
+  "role" : "MEMBER",
+  "status" : "ACTIVE"
+} ]

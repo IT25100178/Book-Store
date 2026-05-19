@@ -1,0 +1,10 @@
+4f8ebe25-8b6f-415c-b147-399ee4321dae|test|Martin Wickramasinghe|12.0|0.0|0.0|Fiction||30|false|false|0|0|📖
+1fa6bfa5-31a4-4fa7-a92f-a2df033fefdc|frfrf|yuva|3.0|0.0|0.0|love|mijhghg|34|false|false|0|0|📖
+ccd3098b-b175-44d0-a341-6dc9eded6065|The Great Gatsby|F. Scott Fitzgerald|10.99|0.0|0.0|Fiction|A classic novel.|50|false|false|0|0|📖
+7b0b8644-75cf-4f31-bd12-d7aa3cf563d5|chan|Martin Wickramasinghe|454.0|0.0|0.0|Memoir||30|false|false|0|0|📖
+fa1d06b3-e307-4f48-8e1a-91b195982802|1984|George Orwell|9.99|0.0|0.0|Dystopian|A terrifying vision.|60|false|false|0|0|📖
+f4cf93de-c130-4e95-a1a1-375478a581dc|test|Michael Ondaatje|12.0|0.0|0.0|History||30|false|false|0|0|📖
+0f4fc6e4-4783-4ca9-bdbd-972c260c43b2|test 1|Yuva|12.0|0.0|0.0|Fiction |good book|54|false|false|0|0|📖
+0fd0223f-0beb-4642-a3e2-27d848ae2478|To Kill a Mockingbird|Harper Lee|12.99|0.0|0.0|Fiction|A powerful novel.|40|false|false|0|0|📖
+2d4090ad-a229-48cb-850e-6f12ed8a37cf|Pride and Prejudice|Jane Austen|8.99|0.0|0.0|Romance|A romantic classic.|70|false|false|0|0|📖
+20f4f5cc-181e-4ad9-a822-20d96c32fe89|The Catcher in the Rye|J.D. Salinger|11.99|0.0|0.0|Fiction|A popular novel.|30|false|false|0|0|📖

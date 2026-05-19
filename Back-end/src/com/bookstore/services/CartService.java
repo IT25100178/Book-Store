@@ -138,12 +138,16 @@ public class CartService {
      */
     public Map<String, Object> applyDiscount(String code) {
         Map<String, Object> result = new LinkedHashMap<>();
-        Map<String, Integer> validCodes = Map.of(
-            "LUXBOOKS10", 10,
-            "OOP2024",    15,
-            "STUDENT20",  20,
-            "WELCOME5",    5
-        );
+        Map<String, Integer> validCodes = new HashMap<>();
+        for (String line : FileStorage.readLines("promotions.txt")) {
+            String[] p = line.split("\\|");
+            // format: id|code|type|value|minOrder|expiry|status|usage|maxUses
+            if (p.length >= 7 && "Active".equalsIgnoreCase(p[6])) {
+                try {
+                    validCodes.put(p[1].toUpperCase(), (int) Double.parseDouble(p[3]));
+                } catch (Exception ignored) {}
+            }
+        }
 
         if (code == null || code.isBlank()) {
             result.put("success", false);

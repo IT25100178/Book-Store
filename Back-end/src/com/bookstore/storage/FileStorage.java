@@ -17,7 +17,7 @@ import java.util.*;
 public class FileStorage {
 
     /** Root directory where all .txt data files are stored */
-    private static final String DATA_DIR = "Back-end/data/";
+    private static final String DATA_DIR = "data/";
 
     // ── Read helpers ─────────────────────────────────────────────────────────
 

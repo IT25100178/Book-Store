@@ -14,6 +14,8 @@ public class Review {
     private String comment;
     private String date;
     private String userName; // denormalized for display
+    private String status = "Approved"; // default
+    private String reply = "";
 
     // ── Constructors ─────────────────────────────────────────────────────────
 
@@ -28,6 +30,13 @@ public class Review {
         this.comment  = comment;
         this.date     = date;
         this.userName = userName;
+    }
+
+    public Review(String id, String userId, String bookId, int rating,
+                  String comment, String date, String userName, String status, String reply) {
+        this(id, userId, bookId, rating, comment, date, userName);
+        this.status = status != null ? status : "Approved";
+        this.reply = reply != null ? reply : "";
     }
 
     // ── Getters & Setters ────────────────────────────────────────────────────
@@ -53,13 +62,20 @@ public class Review {
     public String getUserName()                     { return userName; }
     public void   setUserName(String userName)      { this.userName = userName; }
 
+    public String getStatus()                       { return status; }
+    public void   setStatus(String status)          { this.status = status; }
+
+    public String getReply()                        { return reply; }
+    public void   setReply(String reply)            { this.reply = reply; }
+
     // ── Serialization ─────────────────────────────────────────────────────────
 
-    /** Format: id|userId|bookId|rating|comment|date|userName */
+    /** Format: id|userId|bookId|rating|comment|date|userName|status|reply */
     public String toFileLine() {
         return String.join("|",
             safe(id), safe(userId), safe(bookId),
-            String.valueOf(rating), safe(comment), safe(date), safe(userName)
+            String.valueOf(rating), safe(comment), safe(date), safe(userName),
+            safe(status), safe(reply)
         );
     }
 
@@ -67,7 +83,9 @@ public class Review {
         String[] p = line.split("\\|", -1);
         if (p.length < 7) return null;
         try {
-            return new Review(p[0], p[1], p[2], Integer.parseInt(p[3]), p[4], p[5], p[6]);
+            String status = p.length >= 8 ? p[7] : "Approved";
+            String reply = p.length >= 9 ? p[8] : "";
+            return new Review(p[0], p[1], p[2], Integer.parseInt(p[3]), p[4], p[5], p[6], status, reply);
         } catch (NumberFormatException e) {
             return null;
         }
@@ -81,7 +99,9 @@ public class Review {
             + "\"rating\":"      + rating        + ","
             + "\"comment\":\""   + esc(comment)  + "\","
             + "\"date\":\""      + esc(date)     + "\","
-            + "\"userName\":\""  + esc(userName) + "\""
+            + "\"userName\":\""  + esc(userName) + "\","
+            + "\"status\":\""    + esc(status)   + "\","
+            + "\"reply\":\""     + esc(reply)    + "\""
             + "}";
     }
 
