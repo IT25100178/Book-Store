@@ -1,21 +1,30 @@
 // src/components/Home.jsx
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 import './Home.css';
 
 export default function Home() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const {
+    cartItems,
+    cartCount,
+    subtotal,
+    totalSavings,
+    addToCart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+    notification,
+    showNotification,
+  } = useCart();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [cartCount, setCartCount] = useState(0);
   const [showCart, setShowCart] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [showNotification, setShowNotification] = useState(false);
-  const [notificationMessage, setNotificationMessage] = useState('');
+
   const [isLoading, setIsLoading] = useState(false);
   const [featuredIndex, setFeaturedIndex] = useState(0);
   const [theme, setTheme] = useState(() => {
@@ -178,54 +187,8 @@ export default function Home() {
     return matchesSearch && matchesCategory;
   });
 
-  const addToCart = (book) => {
-    const existingItem = cartItems.find(item => item.id === book.id);
-    if (existingItem) {
-      setCartItems(cartItems.map(item => 
-        item.id === book.id ? { ...item, quantity: item.quantity + 1 } : item
-      ));
-    } else {
-      setCartItems([...cartItems, { ...book, quantity: 1 }]);
-    }
-    setCartCount(cartCount + 1);
-    
-    setNotificationMessage(`${book.title} added to cart!`);
-    setShowNotification(true);
-    setTimeout(() => setShowNotification(false), 3000);
-  };
-
-  const removeFromCart = (id) => {
-    const item = cartItems.find(item => item.id === id);
-    setCartItems(cartItems.filter(item => item.id !== id));
-    setCartCount(cartCount - (item?.quantity || 1));
-    
-    setNotificationMessage(`Item removed from cart`);
-    setShowNotification(true);
-    setTimeout(() => setShowNotification(false), 3000);
-  };
-
-  const updateQuantity = (id, newQuantity) => {
-    if (newQuantity < 1) {
-      removeFromCart(id);
-      return;
-    }
-    setCartItems(cartItems.map(item => 
-      item.id === id ? { ...item, quantity: newQuantity } : item
-    ));
-    const oldItem = cartItems.find(item => item.id === id);
-    const diff = newQuantity - oldItem.quantity;
-    setCartCount(cartCount + diff);
-  };
-
-  const getCartTotal = () => {
-    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
-  };
-
-  const getCartSavings = () => {
-    const originalTotal = cartItems.reduce((total, item) => total + (item.originalPrice * item.quantity), 0);
-    const currentTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-    return (originalTotal - currentTotal).toFixed(2);
-  };
+  const getCartTotal = () => subtotal.toFixed(2);
+  const getCartSavings = () => totalSavings.toFixed(2);
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -280,12 +243,12 @@ export default function Home() {
       </button>
 
       {/* Notification Toast */}
-      {showNotification && (
+      {notification.show && (
         <div className="notification-toast animate-slide-in">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
           </svg>
-          <span>{notificationMessage}</span>
+          <span>{notification.message}</span>
         </div>
       )}
 
@@ -315,6 +278,14 @@ export default function Home() {
             </svg>
             Book List
           </button>
+          <button className={`nav-link ${location.pathname === '/cart' ? 'active' : ''}`} onClick={() => navigate('/cart')}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="9" cy="21" r="1.5" />
+              <circle cx="20" cy="21" r="1.5" />
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+            </svg>
+            Cart
+          </button>
         </div>
 
         <div className="navbar-actions">
@@ -335,16 +306,9 @@ export default function Home() {
             <div className="user-avatar">
               {user?.name?.charAt(0) || user?.email?.charAt(0) || 'U'}
             </div>
-            <Link
-              to="/profile"
-              style={{ color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}
-              onMouseEnter={(e) => e.currentTarget.style.color = '#D4AF37'}
-              onMouseLeave={(e) => e.currentTarget.style.color = 'inherit'}
-            >
-              <span className="user-name">
-                {user?.name || user?.email?.split('@')[0] || 'Reader'}
-              </span>
-            </Link>
+            <span className="user-name">
+              {user?.name || user?.email?.split('@')[0] || 'Reader'}
+            </span>
             <button onClick={logout} className="logout-btn">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l4-4-4-4M20 13H9" stroke="currentColor" strokeWidth="2"/>
@@ -389,9 +353,9 @@ export default function Home() {
                           <span className="original-price">${item.originalPrice}</span>
                         </div>
                         <div className="cart-item-quantity">
-                          <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
+                          <button onClick={() => decreaseQuantity(item.id)}>-</button>
                           <span>{item.quantity}</span>
-                          <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+                          <button onClick={() => increaseQuantity(item.id)}>+</button>
                         </div>
                       </div>
                       <button className="cart-item-remove" onClick={() => removeFromCart(item.id)}>
@@ -412,8 +376,8 @@ export default function Home() {
                     <span>Total</span>
                     <span className="total-amount">${getCartTotal()}</span>
                   </div>
-                  <button className="checkout-btn">
-                    Proceed to Checkout
+                  <button className="checkout-btn" onClick={() => { setShowCart(false); navigate('/cart'); }}>
+                    View Cart
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                       <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" strokeWidth="2"/>
                     </svg>

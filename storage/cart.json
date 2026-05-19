@@ -1,0 +1,24 @@
+[
+  {
+    "bookId": "1",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "price": 4500.0,
+    "originalPrice": 5000.0,
+    "quantity": 2,
+    "image": "📖",
+    "category": "Self-Help",
+    "savedForLater": false
+  },
+  {
+    "bookId": "2",
+    "title": "Deep Work",
+    "author": "Cal Newport",
+    "price": 3800.0,
+    "originalPrice": 4200.0,
+    "quantity": 1,
+    "image": "📚",
+    "category": "Productivity",
+    "savedForLater": true
+  }
+]
